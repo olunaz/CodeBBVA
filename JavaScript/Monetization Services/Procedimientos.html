@@ -1,0 +1,1717 @@
+<script>
+    window.addEventListener('load', procedimientos_iniciales);
+    function procedimientos_iniciales() {
+      google.script.run.withSuccessHandler(loadAccessType).getAccessType();
+      return;
+    };
+  
+    function actualizarDiv(html) {
+      document.getElementById('contenedor_principal').innerHTML = html; 
+      window.scrollTo(0, 0);
+      return;
+    }
+  
+    function generar_notificacion(mensaje) {
+      document.getElementById('pw_notificacion').innerHTML = '' +
+        '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>' +
+        '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 navegador4">' +
+        '  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">' +
+        '    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>' +
+        '    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style = "font-size:12px;padding: 3px;">' + mensaje + '</div>' +
+        '    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>' +
+        '    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"></div>' +
+        '    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">' +
+        '      <button onclick = "limpiar_notificacion();"' + 
+        '              class = "col-lg-12 col-md-12 col-sm-12 col-xs-12 button texto_centrado"' +
+        '              style = "border-radius: 4px 4px 4px 4px;"' +
+        '              id = "id_limpiar_notificacion">' +
+        '        <b>Aceptar</b>' +
+        '      </button>' +
+        '    </div>' +
+        
+        '    <div id = "alerta_guardar_inf" class="col-lg-12 col-md-12 col-sm-12 col-xs-12"' + 
+        '    style = "font-size:12px;padding: 3px;"></div>' +
+        '  </div>' +
+        '</div>';
+      return;
+    };
+  
+    function espera_notificacion(mensaje) {
+      document.getElementById('pw_notificacion').innerHTML = '' +
+        '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>' +
+        '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 navegador4">' +
+        '  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">' +
+        '    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>' +
+        '    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style = "font-size:12px;padding: 3px;">' + mensaje + '</div>' +
+        '    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>' +
+        '    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5"></div>' +
+        '    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">' +
+        '      <div class = "simbolo_carga_pequeño"></div>' +
+        '    </div>' +
+        '    <div id = "alerta_guardar_inf" class="col-lg-12 col-md-12 col-sm-12 col-xs-12"' + 
+        '    style = "font-size:12px;padding: 3px;"></div>' +
+        '  </div>' +
+        '</div>';
+      return;
+    };
+  
+    function limpiar_notificacion() {
+      document.getElementById('pw_notificacion').innerHTML = "";
+      return;
+    };
+  
+    function limpiar_guia() {
+      document.getElementById('pw_guia').innerHTML = "";
+      return;
+    };
+  
+    function mensaje_desarrollador(mensaje){
+      if (document.getElementById('pw_acceso').innerHTML == "Acceso desarrollador"){
+        var valor = document.getElementById('pw_error').innerHTML;
+        document.getElementById('pw_error').innerHTML = valor + "<br>" + mensaje;
+      };
+      return;
+    }
+  
+    function loadAccessType(AccessType) {
+      if (AccessType.nombre == ""){
+        document.getElementById('pw_usuario').innerHTML = AccessType.correo;
+        document.getElementById('pw_acceso').innerHTML = "Acceso genérico";
+      } else {
+        document.getElementById('pw_usuario').innerHTML = AccessType.nombre;
+        document.getElementById('pw_acceso').innerHTML = AccessType.acceso;
+        mensaje_desarrollador('Acceso de desarrollo');
+      };
+  
+      //generar_notificacion("Para una mejor experiencia, les recomendamos acceder a esta página mediante Google Chrome y colocar el zoom en 90%");
+  
+      cargarContenedor("Inicio");  
+      return;
+    };
+    
+    function cargar_pagina_web_libre(pag_web) {
+      window.open(pag_web, '_blank'); 
+    }
+  
+    function cargar_pagina_web(pag_web) {
+      var AccessType = document.getElementById('pw_acceso').innerHTML;
+      if (AccessType == "Acceso genérico") {
+        //window.open(pag_web, '_blank'); 
+        
+        document.getElementById('pw_notificacion').innerHTML = '' +
+            '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>' +
+            '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 navegador3">' +
+            '  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">' +
+            '    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>' +
+            '    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>' +
+            '    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">' +
+            '      Lo sentimos, usted no cuenta con permisos para poder acceder al enlace. Si necesita modificar su tipo de acceso, por favor comunicarse con BEX Transformation de Operaciones Centralizadas.' +
+            '    </div>' +
+            '    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>' +
+            '    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">' +
+            '      <button onclick = "limpiar_notificacion();"' + 
+            '              class="col-lg-12 col-md-12 col-sm-12 col-xs-12 button_notificacion casilla_boton_ingreso texto_centrado" ' +
+            '              id="id_limpiar_notificacion">' +
+            '        <b>Aceptar</b><br>' +
+            '      </button>' +
+            '    </div>' +
+            '  </div>' +
+            '</div>';
+      } else if (AccessType == "Acceso total") {
+        window.open(pag_web, '_blank'); 
+      } else if (AccessType == "Acceso desarrollador") {
+        window.open(pag_web, '_blank'); 
+      }
+    }
+  
+    function cargarContenedor(html) {
+      
+      var AccessType = document.getElementById('pw_acceso').innerHTML;
+      if (AccessType == "Acceso genérico") {
+  
+        if (html == 'Inicio' ||
+            html == 'Formularios' ||
+  
+            html == 'Formularios_SIO' ||
+            html == 'SIO_Metodizacion' ||
+            html == 'SIO_Metodizacion_Ing' ||
+            html == 'SIO_Metodizacion_Con' ||
+            
+            html == 'Formularios_Accounts' ||
+            html == 'AC_CTS_Retencion' ||
+            html == 'AC_CTS_Retencion_Ing' ||
+            html == 'AC_CTS_Retencion_Con' ||
+  
+            html == 'Formularios_Cash' ||
+            html == 'CM_Remesas' ||
+            html == 'CM_Remesas_Ing' ||
+            html == 'CM_Remesas_Con' ||
+            html == 'CM_Remesas_Ate' ||
+  
+            html == 'Formularios_CGR' ||
+            html == 'CGR_Consultas2L' ||
+            html == 'CGR_Consultas2L_Ing' ||
+            html == 'CGR_Consultas2L_Con' ||
+  
+            html == 'Formularios_CSC' ||
+            html == 'CSC_Recaudos' ||
+            html == 'CSC_Recaudos_Ing' ||
+            html == 'CSC_Recaudos_Con' ||
+  
+            html == 'Formularios_Lending' ||
+            html == 'LEN_Autorzaciones_Garant' ||
+            html == 'LEN_Autorzaciones_Garant_Ing' ||
+            html == 'LEN_Autorzaciones_Garant_Con' ||
+            html == 'LEN_Cartera_Prorroga' ||
+            html == 'LEN_Cartera_Prorroga_Ing' ||
+            html == 'LEN_Cartera_Prorroga_Con' ||
+            html == 'LEN_Cred_Hip' ||
+            html == 'LEN_Cred_Hip_Ing' ||
+            html == 'LEN_Cred_Hip_Con' ||
+  
+            html == 'LEN_Lib_Garant' ||
+            html == 'LEN_Lib_Garant_Ing' ||
+            html == 'LEN_Lib_Garant_Con' ||
+  
+            html == 'LEN_CV_Riesgos_Val' ||
+            html == 'LEN_CV_Riesgos_Val_Ing' ||
+            html == 'LEN_CV_Riesgos_Val_Con' ||
+            html == 'LEN_CV_Desembolso' ||
+            html == 'LEN_CV_Desembolso_Ing' ||
+            html == 'LEN_CV_Desembolso_Con' ||
+            html == 'LEN_CV_Consultas' ||
+            html == 'LEN_CV_Consultas_Ing' ||
+            html == 'LEN_CV_Consultas_Con' ||
+            html == 'LEN_Liq_Hip' ||
+            html == 'LEN_Liq_Hip_Ing' ||
+            html == 'LEN_Liq_Hip_Con' ||
+            html == 'LEN_Cred_Hip_BEC' ||
+            html == 'LEN_Cred_Hip_BEC_Ing' ||
+            html == 'LEN_Cred_Hip_BEC_Con' ||
+            html == 'LEN_Cartera_Consultas' ||
+            html == 'LEN_Cartera_Consultas_Ing' ||
+            html == 'LEN_Cartera_Consultas_Con' ||
+            html == 'LEN_Reprog_COFIDE' ||
+            html == 'LEN_Reprog_COFIDE_Ing' ||
+            html == 'LEN_Reprog_COFIDE_Con' ||
+            html == 'LEN_Reprog_no_procesada' ||
+            html == 'LEN_Reprog_no_procesada_Ing' ||
+            html == 'LEN_Reprog_no_procesada_Con' ||
+            html == 'LEN_Ext_Cheques' ||
+            html == 'LEN_Ext_Cheques_Ing' ||
+            html == 'LEN_Ext_Cheques_Con' ||
+            html == 'LEN_Sol_Tasacion' ||
+            html == 'LEN_Sol_Tasacion_Ing' ||
+            html == 'LEN_Sol_Tasacion_Con' ||
+            
+  
+            html == 'Formularios_Logistics' ||
+            html == 'LDS_Atencion_FU' ||
+            html == 'LDS_Atencion_FU_Ing' ||
+            html == 'LDS_Atencion_FU_Con' ||
+  
+            html == 'Tableros' ||
+            html == 'Tableros_Lending' ||
+            html == 'Tableros_Lending_CS' ||
+            html == 'Tableros_Lending_WebPyme' ||
+            
+            html == 'Perfil') {
+        } else { 
+          generar_notificacion('Lo sentimos, usted no cuenta con permisos para poder acceder a esta sección. Si necesita modificar su tipo de acceso, por favor comunicarse con BEX Transformation de Operaciones Centralizadas');
+          return;
+        };
+  
+  
+      
+      } else if (AccessType == "Acceso total") {
+        if (html == 'Inicio' ||
+            html == 'Formularios' ||
+
+            html == 'Formularios_SIO' ||
+            html == 'SIO_Metodizacion' ||
+            html == 'SIO_Metodizacion_Ing' ||
+            html == 'SIO_Metodizacion_Con' ||
+  
+            html == 'Formularios_Accounts' ||
+            html == 'AC_CTS_Retencion' ||
+            html == 'AC_CTS_Retencion_Ing' ||
+            html == 'AC_CTS_Retencion_Con' ||
+  
+            html == 'Formularios_Cash' ||
+            html == 'CM_Remesas' ||
+            html == 'CM_Remesas_Ing' ||
+            html == 'CM_Remesas_Con' ||
+            html == 'CM_Remesas_Ate' ||
+  
+            html == 'Formularios_CGR' ||
+            html == 'CGR_Consultas2L' ||
+            html == 'CGR_Consultas2L_Ing' ||
+            html == 'CGR_Consultas2L_Con' ||
+  
+            html == 'Formularios_CSC' ||
+            html == 'CSC_Recaudos' ||
+            html == 'CSC_Recaudos_Ing' ||
+            html == 'CSC_Recaudos_Con' ||
+  
+            html == 'Formularios_Lending' ||
+            html == 'LEN_Autorzaciones_Garant' ||
+            html == 'LEN_Autorzaciones_Garant_Ing' ||
+            html == 'LEN_Autorzaciones_Garant_Con' ||
+            html == 'LEN_Cartera_Prorroga' ||
+            html == 'LEN_Cartera_Prorroga_Ing' ||
+            html == 'LEN_Cartera_Prorroga_Con' ||
+            html == 'LEN_Cred_Hip' ||
+            html == 'LEN_Cred_Hip_Ing' ||
+            html == 'LEN_Cred_Hip_Con' ||
+  
+            html == 'LEN_Lib_Garant' ||
+            html == 'LEN_Lib_Garant_Ing' ||
+            html == 'LEN_Lib_Garant_Con' ||
+  
+            html == 'LEN_CV_DPS' ||
+            html == 'LEN_CV_DPS_Ing' ||
+            html == 'LEN_CV_DPS_Con' ||
+            html == 'LEN_CV_Riesgos_Val' ||
+            html == 'LEN_CV_Riesgos_Val_Ing' ||
+            html == 'LEN_CV_Riesgos_Val_Con' ||
+            html == 'LEN_CV_Desembolso' ||
+            html == 'LEN_CV_Desembolso_Ing' ||
+            html == 'LEN_CV_Desembolso_Con' ||
+            html == 'LEN_CV_Consultas' ||
+            html == 'LEN_CV_Consultas_Ing' ||
+            html == 'LEN_CV_Consultas_Con' ||
+            html == 'LEN_Liq_Hip' ||
+            html == 'LEN_Liq_Hip_Ing' ||
+            html == 'LEN_Liq_Hip_Con' ||
+            html == 'LEN_Cred_Hip_BEC' ||
+            html == 'LEN_Cred_Hip_BEC_Ing' ||
+            html == 'LEN_Cred_Hip_BEC_Con' ||
+            html == 'LEN_Cartera_Consultas' ||
+            html == 'LEN_Cartera_Consultas_Ing' ||
+            html == 'LEN_Cartera_Consultas_Con' ||
+            html == 'LEN_Reprog_COFIDE' ||
+            html == 'LEN_Reprog_COFIDE_Ing' ||
+            html == 'LEN_Reprog_COFIDE_Con' ||
+            html == 'LEN_Reprog_no_procesada' ||
+            html == 'LEN_Reprog_no_procesada_Ing' ||
+            html == 'LEN_Reprog_no_procesada_Con' ||
+            html == 'LEN_Ext_Cheques' ||
+            html == 'LEN_Ext_Cheques_Ing' ||
+            html == 'LEN_Ext_Cheques_Con' ||
+            html == 'LEN_Sol_Tasacion' ||
+            html == 'LEN_Sol_Tasacion_Ing' ||
+            html == 'LEN_Sol_Tasacion_Con' ||
+            
+  
+            html == 'Formularios_Logistics' ||
+            html == 'LDS_Atencion_FU' ||
+            html == 'LDS_Atencion_FU_Ing' ||
+            html == 'LDS_Atencion_FU_Con' ||
+  
+            html == 'Tableros' ||
+            html == 'Tableros_Lending' ||
+            html == 'Tableros_Lending_CS' ||
+            html == 'Tableros_Lending_WebPyme' ||
+            
+            html == 'Perfil') {
+        } else { 
+          generar_notificacion('Lo sentimos, usted no cuenta con permisos para poder acceder a esta sección. Si necesita modificar su tipo de acceso, por favor comunicarse con BEX Transformation de Operaciones Centralizadas');
+          return;
+        };
+  
+      } else if (AccessType == "Administrador") {
+        if (html == 'Inicio' ||
+            html == 'Formularios' ||
+
+            html == 'Formularios_SIO' ||
+            html == 'SIO_Metodizacion' ||
+            html == 'SIO_Metodizacion_Ing' ||
+            html == 'SIO_Metodizacion_Con' ||
+  
+            html == 'Formularios_Accounts' ||
+            html == 'AC_CTS_Retencion' ||
+            html == 'AC_CTS_Retencion_Ing' ||
+            html == 'AC_CTS_Retencion_Con' ||
+  
+            html == 'Formularios_Cash' ||
+            html == 'CM_Remesas' ||
+            html == 'CM_Remesas_Ing' ||
+            html == 'CM_Remesas_Con' ||
+            html == 'CM_Remesas_Ate' ||
+  
+            html == 'Formularios_CGR' ||
+            html == 'CGR_Consultas2L' ||
+            html == 'CGR_Consultas2L_Ing' ||
+            html == 'CGR_Consultas2L_Con' ||
+  
+            html == 'Formularios_CSC' ||
+            html == 'CSC_Recaudos' ||
+            html == 'CSC_Recaudos_Ing' ||
+            html == 'CSC_Recaudos_Con' ||
+  
+            html == 'Formularios_Lending' ||
+            html == 'LEN_Autorzaciones_Garant' ||
+            html == 'LEN_Autorzaciones_Garant_Ing' ||
+            html == 'LEN_Autorzaciones_Garant_Con' ||
+            html == 'LEN_Cartera_Prorroga' ||
+            html == 'LEN_Cartera_Prorroga_Ing' ||
+            html == 'LEN_Cartera_Prorroga_Con' ||
+            html == 'LEN_Cred_Hip' ||
+            html == 'LEN_Cred_Hip_Ing' ||
+            html == 'LEN_Cred_Hip_Con' ||
+  
+            html == 'LEN_Lib_Garant' ||
+            html == 'LEN_Lib_Garant_Ing' ||
+            html == 'LEN_Lib_Garant_Con' ||
+  
+            
+            html == 'LEN_CV_DPS' ||
+            html == 'LEN_CV_DPS_Ing' ||
+            html == 'LEN_CV_DPS_Con' ||
+            html == 'LEN_CV_Riesgos_Val' ||
+            html == 'LEN_CV_Riesgos_Val_Ing' ||
+            html == 'LEN_CV_Riesgos_Val_Con' ||
+            html == 'LEN_CV_Desembolso' ||
+            html == 'LEN_CV_Desembolso_Ing' ||
+            html == 'LEN_CV_Desembolso_Con' ||
+            html == 'LEN_CV_Consultas' ||
+            html == 'LEN_CV_Consultas_Ing' ||
+            html == 'LEN_CV_Consultas_Con' ||
+            html == 'LEN_Liq_Hip' ||
+            html == 'LEN_Liq_Hip_Ing' ||
+            html == 'LEN_Liq_Hip_Con' ||
+            html == 'LEN_Cred_Hip_BEC' ||
+            html == 'LEN_Cred_Hip_BEC_Ing' ||
+            html == 'LEN_Cred_Hip_BEC_Con' ||
+            html == 'LEN_Cartera_Consultas' ||
+            html == 'LEN_Cartera_Consultas_Ing' ||
+            html == 'LEN_Cartera_Consultas_Con' ||
+            html == 'LEN_Reprog_COFIDE' ||
+            html == 'LEN_Reprog_COFIDE_Ing' ||
+            html == 'LEN_Reprog_COFIDE_Con' ||
+            html == 'LEN_Reprog_no_procesada' ||
+            html == 'LEN_Reprog_no_procesada_Ing' ||
+            html == 'LEN_Reprog_no_procesada_Con' ||
+            html == 'LEN_Ext_Cheques' ||
+            html == 'LEN_Ext_Cheques_Ing' ||
+            html == 'LEN_Ext_Cheques_Con' ||
+            html == 'LEN_Sol_Tasacion' ||
+            html == 'LEN_Sol_Tasacion_Ing' ||
+            html == 'LEN_Sol_Tasacion_Con' ||
+  
+            html == 'Formularios_Logistics' ||
+            html == 'LDS_Atencion_FU' ||
+            html == 'LDS_Atencion_FU_Ing' ||
+            html == 'LDS_Atencion_FU_Con' ||
+  
+            html == 'Tableros' ||
+            html == 'Tableros_Lending' ||
+            html == 'Tableros_Lending_CS' ||
+            html == 'Tableros_Lending_WebPyme' ||
+            
+            html == 'Perfil') {
+        } else { 
+          generar_notificacion('Lo sentimos, usted no cuenta con permisos para poder acceder a esta sección. Si necesita modificar su tipo de acceso, por favor comunicarse con BEX Transformation de Operaciones Centralizadas');
+          return;
+        };
+        
+      } else if (AccessType == "Acceso desarrollador") {
+        if (html == 'Inicio' ||
+            html == 'Formularios' ||
+
+            html == 'Formularios_SIO' ||
+            html == 'SIO_Metodizacion' ||
+            html == 'SIO_Metodizacion_Ing' ||
+            html == 'SIO_Metodizacion_Con' ||
+  
+            html == 'Formularios_Accounts' ||
+            html == 'AC_CTS_Retencion' ||
+            html == 'AC_CTS_Retencion_Ing' ||
+            html == 'AC_CTS_Retencion_Con' ||
+  
+            html == 'Formularios_Cash' ||
+            html == 'CM_Remesas' ||
+            html == 'CM_Remesas_Ing' ||
+            html == 'CM_Remesas_Con' ||
+            html == 'CM_Remesas_Ate' ||
+  
+            html == 'Formularios_CGR' ||
+            html == 'CGR_Consultas2L' ||
+            html == 'CGR_Consultas2L_Ing' ||
+            html == 'CGR_Consultas2L_Con' ||
+  
+            html == 'Formularios_CSC' ||
+            html == 'CSC_Recaudos' ||
+            html == 'CSC_Recaudos_Ing' ||
+            html == 'CSC_Recaudos_Con' ||
+  
+            html == 'Formularios_Lending' ||
+            html == 'LEN_Autorzaciones_Garant' ||
+            html == 'LEN_Autorzaciones_Garant_Ing' ||
+            html == 'LEN_Autorzaciones_Garant_Con' ||
+            html == 'LEN_Cartera_Prorroga' ||
+            html == 'LEN_Cartera_Prorroga_Ing' ||
+            html == 'LEN_Cartera_Prorroga_Con' ||
+            html == 'LEN_Cred_Hip' ||
+            html == 'LEN_Cred_Hip_Ing' ||
+            html == 'LEN_Cred_Hip_Con' ||
+  
+            html == 'LEN_Lib_Garant' ||
+            html == 'LEN_Lib_Garant_Ing' ||
+            html == 'LEN_Lib_Garant_Con' ||
+  
+  
+            html == 'LEN_CV_DPS' ||
+            html == 'LEN_CV_DPS_Ing' ||
+            html == 'LEN_CV_DPS_Con' ||
+            html == 'LEN_CV_Riesgos_Val' ||
+            html == 'LEN_CV_Riesgos_Val_Ing' ||
+            html == 'LEN_CV_Riesgos_Val_Con' ||
+            html == 'LEN_CV_Desembolso' ||
+            html == 'LEN_CV_Desembolso_Ing' ||
+            html == 'LEN_CV_Desembolso_Con' ||
+            html == 'LEN_CV_Consultas' ||
+            html == 'LEN_CV_Consultas_Ing' ||
+            html == 'LEN_CV_Consultas_Con' ||
+            html == 'LEN_Liq_Hip' ||
+            html == 'LEN_Liq_Hip_Ing' ||
+            html == 'LEN_Liq_Hip_Con' ||
+            html == 'LEN_Cred_Hip_BEC' ||
+            html == 'LEN_Cred_Hip_BEC_Ing' ||
+            html == 'LEN_Cred_Hip_BEC_Con' ||
+            html == 'LEN_Cartera_Consultas' ||
+            html == 'LEN_Cartera_Consultas_Ing' ||
+            html == 'LEN_Cartera_Consultas_Con' ||
+            html == 'LEN_Reprog_COFIDE' ||
+            html == 'LEN_Reprog_COFIDE_Ing' ||
+            html == 'LEN_Reprog_COFIDE_Con' ||
+            html == 'LEN_Reprog_no_procesada' ||
+            html == 'LEN_Reprog_no_procesada_Ing' ||
+            html == 'LEN_Reprog_no_procesada_Con' ||
+            html == 'LEN_Ext_Cheques' ||
+            html == 'LEN_Ext_Cheques_Ing' ||
+            html == 'LEN_Ext_Cheques_Con' ||
+            html == 'LEN_Sol_Tasacion' ||
+            html == 'LEN_Sol_Tasacion_Ing' ||
+            html == 'LEN_Sol_Tasacion_Con' ||
+            
+  
+            html == 'Formularios_Logistics' ||
+            html == 'LDS_Atencion_FU' ||
+            html == 'LDS_Atencion_FU_Ing' ||
+            html == 'LDS_Atencion_FU_Con' ||
+  
+            html == 'Tableros' ||
+            html == 'Tableros_Lending' ||
+            html == 'Tableros_Lending_CS' ||
+            html == 'Tableros_Lending_WebPyme' ||
+            
+            html == 'Perfil') {
+        } else { 
+          generar_notificacion('Lo sentimos, usted no cuenta con permisos para poder acceder a esta sección. Si necesita modificar su tipo de acceso, por favor comunicarse con BEX Transformation de Operaciones Centralizadas');
+          return;
+        };
+        
+      } else {html = 'Inicio';};
+      
+      mensaje_desarrollador('Html: ' + html);
+      
+      var value_scroll = 0;
+  
+      google.script.run.withSuccessHandler(
+        (value_contenedor) => {
+          document.getElementById('contenedor_principal').innerHTML = value_contenedor;
+          window.scrollTo(0, value_scroll);
+          
+          if (html == "Perfil") {
+            google.script.run.withSuccessHandler((valores) => {
+              document.getElementById('correo').value = valores.correo;
+              document.getElementById('registro').value = valores.registro;
+              document.getElementById('nombre_completo').value = valores.nombre_completo;
+              document.getElementById('nombre').value = valores.nombre;
+              document.getElementById('acceso').value = valores.acceso;
+              //document.getElementById('cant_reg').value = valores.cant_reg;
+              document.getElementById('oficina').value = valores.oficina;
+              document.getElementById('nombre_oficina').value = valores.nombre_oficina;
+              document.getElementById('territorio').value = valores.territorio;
+              
+            }).capturar_informacion();
+          }
+  
+          if (html == "SIO_Metodizacion_Ing" ||
+              html == "AC_CTS_Retencion_Ing" ||
+              html == "CM_Remesas_Ing" ||
+              html == "CGR_Consultas2L_Ing" ||
+              html == "CSC_Recaudos_Ing" || 
+              html == "LDS_Atencion_FU_Ing" ||
+              html == "LEN_Autorzaciones_Garant_Ing" || 
+              html == "LEN_Cartera_Prorroga_Ing" || 
+              html == "LEN_Cred_Hip_Ing" || 
+              html == "LEN_Cred_Hip_BEC_Ing" || 
+              html == 'LEN_Lib_Garant_Ing' ||
+              html == "LEN_CV_DPS_Ing" || 
+              html == "LEN_CV_Riesgos_Val_Ing" || 
+              html == "LEN_CV_Desembolso_Ing" || 
+              html == "LEN_CV_Consultas_Ing" || 
+              html == "LEN_Liq_Hip_Ing" || 
+              html == "LEN_Ext_Cheques_Ing" || 
+              html == "LEN_Sol_Tasacion_Ing" || 
+              html == "LEN_Cartera_Consultas_Ing" || 
+              html == "LEN_Reprog_COFIDE_Ing" ||
+              html == "LDS_Atencion_FU_Ing") {
+  
+            google.script.run.withSuccessHandler((valores) => {
+              document.getElementById('correo').value = valores.correo;
+              document.getElementById('registro').value = valores.registro;
+              document.getElementById('nombre').value = valores.nombre_completo;
+              
+              document.getElementById('oficina').value = valores.oficina;
+              document.getElementById('nombre_oficina').value = valores.nombre_oficina;
+              document.getElementById('territorio').value = valores.territorio;
+  
+              if (valores.registro != "") { document.getElementById('registro').disabled = true; };
+              if (valores.nombre_completo != "") { document.getElementById('nombre').disabled = true; };
+  
+  
+            }).capturar_informacion();
+          }
+  
+          buscar_unidad_gestora
+          if (html == "LEN_CV_Desembolso_Ing") { 
+            buscar_unidad_gestora();
+          }
+  
+  
+          if (html == "CGR_Consultas2L_Ing") { 
+            codigoCasoGenerado();
+            confirmar_accesos_Consultas2L();
+          }
+  
+          if (html == "CGR_Consultas2L_Con") { 
+            confirmar_accesos_Consultas2L_Con();
+          }
+  
+          /*
+          if (html == "LEN_CV_Consultas_Ing") { 
+            confirmar_accesos_CV_Consultas_Ing();
+          }
+  
+          if (html == "LEN_CV_Consultas_Con") { 
+            confirmar_accesos_CV_Consultas_Con();
+          }
+          */
+        
+          if (html == "LEN_Reprog_no_procesada_Ing") {
+            google.script.run.withSuccessHandler((valores) => {
+              document.getElementById('correo').value = valores.correo;
+              document.getElementById('cod_oficina').value = valores.oficina;
+            }).capturar_informacion();
+          }
+        
+          if (html == "SIO_Metodizacion_Con" ||
+              html == "AC_CTS_Retencion_Con" ||
+              html == "LEN_Autorzaciones_Garant_Con" ||
+              html == "LDS_Atencion_FU_Con") {
+            google.script.run.withSuccessHandler((valores) => {
+              document.getElementById('registro').value = valores.registro;
+            }).capturar_informacion();
+          }
+  
+          if (html == "CM_Remesas_Con" ||
+              html == "ddd" ||
+              html == "ffff") {
+            google.script.run.withSuccessHandler((valores) => {
+              document.getElementById('oficina').value = valores.oficina;
+            }).capturar_informacion();
+          }
+  
+          if (html == "CM_Remesas_Ate" ) {
+            buscar_registros_remesas();
+          }
+  
+          
+  
+  
+        }
+      ).include(html);
+  
+    }
+  
+  
+    function consultar_tableros() {
+      try {
+        var Informacion = {}
+        
+        Informacion.slo = document.getElementById('slo').value;
+        Informacion.estado = document.getElementById('estado').value;
+        Informacion.nombre_tablero = document.getElementById('nombre_tablero').value;
+        
+        document.getElementById('tabla_tableros').innerHTML = '' +
+          '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' + 
+          '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' + 
+          '<div class = "fila">' + 
+          '  <div class = "col-lg-5 col-md-5 col-sm-5 col-xs-5"></div>' + 
+          '  <div class = "col-lg-5-5 col-md-5-5 col-sm-5-5 col-xs-5-5"><div class = "simbolo_carga"></div></div>' + 
+          '</div>' + 
+          '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' + 
+          '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>';
+    
+        google.script.run.withSuccessHandler(
+          (Informacion) => {
+            if (Informacion.Tableros == ""){
+              document.getElementById('tabla_tableros').innerHTML = '';
+            } else {
+              document.getElementById("tabla_tableros").innerHTML = Informacion.Tableros;
+            }
+          }).cargar_tableros(Informacion);
+     
+      } catch (error){
+        mensaje_desarrollador(error);
+      };
+      
+    }
+  
+  
+    function consultar_comunicaciones() {
+      try {
+        var Informacion = {}
+        
+        Informacion.slo = document.getElementById('slo').value;
+        Informacion.estado = "";
+        Informacion.digital_agenda = "";
+        Informacion.tipo_recurso = document.getElementById('tipo_recurso').value;
+        Informacion.fecha_inicio = document.getElementById('fecha_inicio').value;
+        Informacion.fecha_fin = document.getElementById('fecha_fin').value;
+        
+        document.getElementById('tabla_comunicaciones').innerHTML = '' +
+          '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' + 
+          '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' + 
+          '<div class = "fila">' + 
+          '  <div class = "col-lg-5 col-md-5 col-sm-5 col-xs-5"></div>' + 
+          '  <div class = "col-lg-5-5 col-md-5-5 col-sm-5-5 col-xs-5-5"><div class = "simbolo_carga"></div></div>' + 
+          '</div>' + 
+          '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' + 
+          '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>';
+    
+        google.script.run.withSuccessHandler(
+          (Informacion) => {
+            if (Informacion.Recursos == ""){
+              document.getElementById('tabla_comunicaciones').innerHTML = '';
+            } else {
+              document.getElementById("tabla_comunicaciones").innerHTML = Informacion.Recursos;
+            }
+          }).cargar_comunicaciones(Informacion);
+     
+      } catch (error){
+        mensaje_desarrollador(error);
+      };
+      
+    }
+  
+  
+    function consultar_capacitaciones() {
+      try {
+        mensaje_desarrollador('Se inicio procedimiento consultar_recursos');
+        
+        var Informacion = {}
+        Informacion.slo = document.getElementById('slo').value;
+        Informacion.tipo_recurso = document.getElementById('tipo_recurso').value;
+        Informacion.fecha_inicio = document.getElementById('fecha_inicio').value;
+        Informacion.fecha_fin = document.getElementById('fecha_fin').value;
+  
+        document.getElementById('tabla_capacitaciones').innerHTML = '' +
+          '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' + 
+          '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' + 
+          '<div class = "fila">' + 
+          '  <div class = "col-lg-5 col-md-5 col-sm-5 col-xs-5"></div>' + 
+          '  <div class = "col-lg-5-5 col-md-5-5 col-sm-5-5 col-xs-5-5"><div class = "simbolo_carga"></div></div>' + 
+          '</div>' + 
+          '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' + 
+          '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>';
+  
+        google.script.run.withSuccessHandler(
+          (Informacion) => {
+            if (Informacion.Recursos == ""){
+              document.getElementById('tabla_capacitaciones').innerHTML = '';
+            } else {
+              document.getElementById("tabla_capacitaciones").innerHTML = Informacion.Recursos;
+            }
+  
+          }
+        ).cargar_capacitaciones(Informacion);
+  
+      } catch (error){
+        mensaje_desarrollador(error);
+      }
+      
+    } 
+  
+  
+  
+    function getFiles_Mod(id,id_url,id_folder,proc) {
+      mensaje_desarrollador('getFiles_Mod');
+      document.getElementById(id_url).value = 'Cargando...';
+      try {
+        mensaje_desarrollador("id: " + id + ";id_url: " + id_url + ";id_folder: " + id_folder + ";proc: " + proc);
+        const f = document.getElementById(id);
+        [...f.files].forEach((file, i) => {
+          const fr = new FileReader();
+          fr.onload = (e) => {const data = e.target.result.split(",");
+          const obj = {fileName: f.files[i].name, mimeType: data[0].match(/:(\w.+);/)[1], data: data[1],folder: id_folder,proceso: proc};
+          google.script.run.withSuccessHandler((InfFile) => {
+              document.getElementById(id_url).value = InfFile.url;
+              mensaje_desarrollador('InfFile.url'+ InfFile.url);
+            }
+          ).saveFile(obj);};
+          fr.readAsDataURL(file);
+        });
+      } catch (error){
+        mensaje_desarrollador(error);
+      };
+    };
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+    function consultar_cantidad_proyectos() {
+      try {
+        mensaje_desarrollador('Consultando cantidades de proyectos');
+  
+        var Informacion = {};
+        google.script.run.withSuccessHandler(
+          (Informacion) => {
+            if (Informacion.en_curso == ""){
+              document.getElementById('cant_proyectos_en_curso').innerHTML = '';
+            } else {
+              if (Informacion.en_curso == 1) {Informacion.en_curso = Informacion.en_curso + " proyecto"} else {Informacion.en_curso = Informacion.en_curso + " proyectos"} 
+              document.getElementById("cant_proyectos_en_curso").innerHTML = '' + 
+                '<div style = "height: 14px;"></div>' +
+                '<div class = "fila">' +
+                '  <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5">     </div>' +
+                '  <div class = "campo titulo_20_navy col-lg-11 col-md-11 col-sm-11 col-xs-11" style = "text-align: left;">' + Informacion.en_curso + '</div>' +
+                '</div>';
+            }
+  
+            if (Informacion.terminados == ""){
+              document.getElementById('cant_proyectos_terminados').innerHTML = '';
+            } else {
+              if (Informacion.terminados == 1) {Informacion.terminados = Informacion.terminados + " proyecto"} else {Informacion.terminados = Informacion.terminados + " proyectos"} 
+              document.getElementById("cant_proyectos_terminados").innerHTML = '' + 
+                '<div style = "height: 14px;">     </div>' +
+                '<div class = "fila">' +
+                '  <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5">     </div>' +
+                '  <div class = "campo titulo_20_navy col-lg-11 col-md-11 col-sm-11 col-xs-11" style = "text-align: left;">' + Informacion.terminados + '</div>' +
+                '</div>';
+            }
+  
+            if (Informacion.backlog == ""){
+              document.getElementById('cant_proyectos_backlog').innerHTML = '';
+            } else {
+              if (Informacion.backlog == 1) {Informacion.backlog = Informacion.backlog + " proyecto"} else {Informacion.backlog = Informacion.backlog + " proyectos"} 
+              document.getElementById("cant_proyectos_backlog").innerHTML = '' + 
+                '<div style = "height: 14px;">     </div>' +
+                '<div class = "fila">' +
+                '  <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5">     </div>' +
+                '  <div class = "campo titulo_20_navy col-lg-11 col-md-11 col-sm-11 col-xs-11" style = "text-align: left;">' + Informacion.backlog + '</div>' +
+                '</div>';
+            }
+  
+          }
+        ).cargar_cantidad_proyectos(Informacion);
+      } catch (error){
+        mensaje_desarrollador(error);
+      };
+    }
+  
+    function desplegar_backlog() {
+      try {
+        mensaje_desarrollador('desplegar_backlog');
+        var valor = document.getElementById('espacio_backlog').innerHTML;
+        if (valor != "") {
+          document.getElementById('espacio_backlog').innerHTML = '';
+          document.getElementById('boton_backlog').innerHTML = '' +
+            '<div onclick = "desplegar_backlog()"' +
+            '     class = "button_desplegable_verde col-lg-aut col-md-aut col-sm-aut col-xs-aut">' +
+            '  <i class="material-icons">expand_more</i>&nbsp;&nbsp;&nbsp;&nbsp;<b>Ver proyectos</b>' +
+            '</div>';
+          return;
+        } else {
+          document.getElementById('espacio_backlog').innerHTML = '' +
+            '<div class = "fila">' +
+            '  <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5" style = "height: 5px;padding:0px;"></div>' +
+            '  <div class = "campo col-lg-11 col-md-11 col-sm-11 col-xs-11"><div class = "linea_navy"></div></div>' +
+            '</div>' +
+            '<div class = "fila">' +
+            '  <div class = "col-lg-9-5 col-md-9-5 col-sm-9-5 col-xs-9-5">    ' + 
+            '    <div class = "fila">' +
+            '      <div class = "col-lg-1 col-md-1 col-sm-1 col-xs-1">     </div>' +
+            '      <div class = "campo col-lg-2 col-md-2 col-sm-2 col-xs-2 letra_bbva_core_blue" id = "titulo_slo">' +
+            '        <b>Service Line</b>' +
+            '      </div>' +
+            '      <select class = "campo col-lg-2 col-md-2 col-sm-2 col-xs-2" id="slo">' +
+            '        <option style = "color:black" value = "Todos">Todos</option>' +
+            '        <option style = "color:black" value = "BEx Transformation">BEx Transformation</option>' +
+            '        <option style = "color:black" value = "Channels">Channels</option>' +
+            '        <option style = "color:black" value = "Cash Management">Cash Management</option>' +
+            '        <option style = "color:black" value = "CGR">CGR</option>' +
+            '        <option style = "color:black" value = "Cuentas y Transaccionales">Cuentas y Transaccionales</option>' +
+            '        <option style = "color:black" value = "Customer Service Channels">Customer Service Channels</option>' +
+            '        <option style = "color:black" value = "Lending">Lending</option>' +
+            '        <option style = "color:black" value = "Logistic & Digital Services">Logistic & Digital Services</option>' +
+            '        <option style = "color:black" value = "Payments & Services">Payments & Services</option>' +
+            '      </select> ' +
+            '      <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5"></div>' +
+            '      <div class = "campo col-lg-2 col-md-2 col-sm-2 col-xs-2 letra_bbva_core_blue" id = "titulo_digital_agenda">' +
+            '        <b>Operations Digital Agenda</b>' +
+            '      </div>' +
+            '      <select class = "campo col-lg-2 col-md-2 col-sm-2 col-xs-2" id="digital_agenda">' +
+            '        <option style = "color:black" value = "Todos">Todos</option>' +
+            '        <option style = "color:black" value = "Internal Process">Internal Process</option>' +
+            '        <option style = "color:black" value = "BEx Transformation">BEx Transformation</option>' +
+            '        <option style = "color:black" value = "SDA">SDA</option>' +
+            '      </select> ' +
+            '    </div>' +
+            '    <div style = "height: 6px;"></div>' +
+            '  </div>' +
+            '  <div class = "col-lg-2 col-md-2 col-sm-2 col-xs-2">   ' +  
+            '    <div class = "fila">' +
+            '      <div style = "height: 3px;">     </div>' +
+            '      <div onclick = "consultar_proyectos(' + "'En curso'" + ');" class = "button col-lg-aut col-md-aut col-sm-aut col-xs-aut" ' +
+            '          style = "text-align: center;padding: 10px 20px 10px 20px;border-radius: 4px 4px 4px 4px;">' +
+            '        <i class="material-icons">search</i>&nbsp;&nbsp;&nbsp;&nbsp;<b>Buscar</b>' +
+            '      </div>' +
+            '    </div>' +
+            '  </div>' +
+            '</div>' +
+            '<div class = "fila">' +
+            '  <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5" style = "height: 10px;padding:0px;">     </div>' +
+            '  <div class = "campo col-lg-11 col-md-11 col-sm-11 col-xs-11"> ' +    
+            '    <div class = "linea_navy"></div>' +
+            '  </div>' +
+            '</div>' +
+            '<div class = "fila">' +
+            '  <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5">     </div>' +
+            '  <div class = "col-lg-11 col-md-11 col-sm-11 col-xs-11" style = "padding: 0px 2px 3px 2px;">     ' +
+            '    <b style = "color:#277A3E;float:right;cursor: pointer;" ' +
+            '       onclick = "cargar_pagina_web_libre(' +
+            "'https://docs.google.com/spreadsheets/d/1Fq-0aMRQY3FO55ziZtKHydzRbx9tqjpJW1cZqfZ0VVI/edit?usp=sharing'" + 
+            ')">' +
+            '      <i class="tiny material-icons">folder</i> &nbsp;&nbsp;&nbsp;&nbsp; Acceso a Excel' +
+            '    </b>' +
+            '  </div>' +
+            '</div>' +
+            '<div class = "fila">' +
+            '  <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5">     </div>' +
+            '  <div class = "col-lg-11 col-md-11 col-sm-11 col-xs-11" style = "padding: 2px 0px 2px 0px;">     ' +
+            '    <span id = "tabla_backlog">' +
+            '      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' +
+            '      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' +
+            '      <div class = "fila">' +
+            '        <div class = "col-lg-5 col-md-5 col-sm-5 col-xs-5"></div>' +
+            '        <div class = "col-lg-5-5 col-md-5-5 col-sm-5-5 col-xs-5-5"><div class = "simbolo_carga"></div></div>' +
+            '      </div>' +
+            '      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' +
+            '      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' +
+            '    </span>' +
+            '  </div>' +
+            '</div>' +
+            '<div style = "height: 5px;">     </div>' +
+            '<div class = "fila">     ' +
+            '  <div class = "col-lg-5 col-md-5 col-sm-5 col-xs-5">     </div>' +
+            '  <div class = "col-lg-2 col-md-2 col-sm-2 col-xs-2">     ' +
+            '    <div class = "linea_navy"></div>' +
+            '  </div>' +
+            '</div>';
+          
+          document.getElementById('boton_backlog').innerHTML = '' +
+            '<div onclick = "desplegar_backlog()"' +
+            '     class = "button_desplegable_rojo col-lg-aut col-md-aut col-sm-aut col-xs-aut">' +
+            '  <i class="material-icons">expand_less</i>&nbsp;&nbsp;&nbsp;&nbsp;<b>Ocultar proyectos</b>' +
+            '</div>';
+          
+          consultar_backlog();
+        }
+      } catch (error){
+        mensaje_desarrollador(error);
+      };
+    }
+  
+    function desplegar_proyectos_en_curso() {
+      try {
+        var valor = document.getElementById('espacio_Proyectos_en_curso').innerHTML;
+        if (valor != "") {
+          document.getElementById('espacio_Proyectos_en_curso').innerHTML = '';
+          document.getElementById('boton_Proyectos_en_curso').innerHTML = '' +
+                      '<div onclick = "desplegar_proyectos_en_curso()"' +
+                      '     class = "button_desplegable_verde col-lg-aut col-md-aut col-sm-aut col-xs-aut">' +
+                      '  <i class="material-icons">expand_more</i>&nbsp;&nbsp;&nbsp;&nbsp;<b>Ver proyectos</b>' +
+                      '</div>';
+          return;
+        } else {
+          document.getElementById('espacio_Proyectos_en_curso').innerHTML = '' +
+            '<div class = "fila">' +
+            '  <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5" style = "height: 5px;padding:0px;"></div>' +
+            '  <div class = "campo col-lg-11 col-md-11 col-sm-11 col-xs-11"><div class = "linea_navy"></div></div>' +
+            '</div>' +
+            '<div class = "fila">' +
+            '  <div class = "col-lg-9-5 col-md-9-5 col-sm-9-5 col-xs-9-5">    ' + 
+            '    <div class = "fila">' +
+            '      <div class = "col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>' +
+            '      <div class = "campo col-lg-2 col-md-2 col-sm-2 col-xs-2 letra_bbva_core_blue" id = "titulo_slo">' +
+            '        <b>Service Line</b>' +
+            '      </div>' +
+            '      <select class = "campo col-lg-2 col-md-2 col-sm-2 col-xs-2" id="slo">' +
+            '        <option style = "color:black" value = "Todos">Todos</option>' +
+            '        <option style = "color:black" value = "BEx Transformation">BEx Transformation</option>' +
+            '        <option style = "color:black" value = "Channels">Channels</option>' +
+            '        <option style = "color:black" value = "Cash Management">Cash Management</option>' +
+            '        <option style = "color:black" value = "CGR">CGR</option>' +
+            '        <option style = "color:black" value = "Cuentas y Transaccionales">Cuentas y Transaccionales</option>' +
+            '        <option style = "color:black" value = "Customer Service Channels">Customer Service Channels</option>' +
+            '        <option style = "color:black" value = "Lending">Lending</option>' +
+            '        <option style = "color:black" value = "Logistic & Digital Services">Logistic & Digital Services</option>' +
+            '        <option style = "color:black" value = "Payments & Services">Payments & Services</option>' +
+            '      </select> ' +
+            '      <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5"></div>' +
+            '      <div class = "campo col-lg-2 col-md-2 col-sm-2 col-xs-2 letra_bbva_core_blue" id = "titulo_digital_agenda">' +
+            '        <b>Operations Digital Agenda</b>' +
+            '      </div>' +
+            '      <select class = "campo col-lg-2 col-md-2 col-sm-2 col-xs-2"  id="digital_agenda">' +
+            '        <option style = "color:black" value = "Todos">Todos</option>' +
+            '        <option style = "color:black" value = "Internal Process">Internal Process</option>' +
+            '        <option style = "color:black" value = "BEx Transformation">BEx Transformation</option>' +
+            '        <option style = "color:black" value = "SDA">SDA</option>' +
+            '      </select> ' +
+            '    </div>' +
+            '    <div style = "height: 6px;"></div>' +
+            '    <div class = "fila">' +
+            '      <div class = "col-lg-1 col-md-1 col-sm-1 col-xs-1">     </div>' +
+            '      <div class = "campo col-lg-2 col-md-2 col-sm-2 col-xs-2 letra_bbva_core_blue" id = "titulo_fecha_inicio">' +
+            '        <b>Fecha Inicio</b>' +
+            '      </div>' +
+            '      <input type = "date" class = "campo col-lg-2 col-md-2 col-sm-2 col-xs-2" id = "fecha_inicio" >' +
+            '      <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5">     </div>' +
+            '      <div class = "campo col-lg-2 col-md-2 col-sm-2 col-xs-2 letra_bbva_core_blue"' +
+            '          id = "titulo_fecha_fin">' +
+            '        <b>Fecha Fin</b>' +
+            '      </div>' +
+            '      <input type = "date" class = "campo col-lg-2 col-md-2 col-sm-2 col-xs-2" id = "fecha_fin" >' +
+            '    </div>' +
+            '    <div style = "height: 0px;">     </div>' +
+            '  </div>' +
+            '  <div class = "col-lg-2 col-md-2 col-sm-2 col-xs-2">   ' +  
+            '    <div class = "fila">' +
+            '      <div style = "height: 3px;">     </div>' +
+            '      <div onclick = "consultar_proyectos(' + "'En curso'" + ');" class = "button col-lg-aut col-md-aut col-sm-aut col-xs-aut" ' +
+            '          style = "text-align: center;padding: 10px 20px 10px 20px;border-radius: 4px 4px 4px 4px;">' +
+            '        <i class="material-icons">search</i>&nbsp;&nbsp;&nbsp;&nbsp;<b>Buscar</b>' +
+            '      </div>' +
+            '    </div>' +
+            '  </div>' +
+            '</div>' +
+            '<div class = "fila">' +
+            '  <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5" style = "height: 10px;padding:0px;"></div>' +
+            '  <div class = "campo col-lg-11 col-md-11 col-sm-11 col-xs-11"> ' +    
+            '    <div class = "linea_navy"></div>' +
+            '  </div>' +
+            '</div>' +
+            '<div class = "fila">' +
+            '  <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5">     </div>' +
+            '  <div class = "col-lg-11 col-md-11 col-sm-11 col-xs-11" style = "padding: 0px 2px 3px 2px;">     ' +
+            '    <b style = "color:#277A3E;float:right;cursor: pointer;" ' +
+            '      onclick = "cargar_pagina_web_libre(' +
+            "'https://docs.google.com/spreadsheets/d/1Fq-0aMRQY3FO55ziZtKHydzRbx9tqjpJW1cZqfZ0VVI/edit?usp=sharing'" + 
+            ')">' +
+            '      <i class="tiny material-icons">folder</i> &nbsp;&nbsp;&nbsp;&nbsp; Acceso a Excel' +
+            '    </b>' +
+            '  </div>' +
+            '</div>' +
+            '<div class = "fila">' +
+            '  <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5">     </div>' +
+            '  <div class = "col-lg-11 col-md-11 col-sm-11 col-xs-11" style = "padding: 2px 0px 2px 0px;">     ' +
+            '    <span id = "tabla_proyectos_en_curso">' +
+            '      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' +
+            '      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' +
+            '      <div class = "fila">' +
+            '        <div class = "col-lg-5 col-md-5 col-sm-5 col-xs-5"></div>' +
+            '        <div class = "col-lg-5-5 col-md-5-5 col-sm-5-5 col-xs-5-5"><div class = "simbolo_carga"></div></div>' +
+            '      </div>' +
+            '      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' +
+            '      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' +
+            '    </span>' +
+            '  </div>' +
+            '</div>' +
+            '<div style = "height: 5px;">     </div>' +
+            '<div class = "fila">     ' +
+            '  <div class = "col-lg-5 col-md-5 col-sm-5 col-xs-5">     </div>' +
+            '  <div class = "col-lg-2 col-md-2 col-sm-2 col-xs-2">     ' +
+            '    <div class = "linea_navy"></div>' +
+            '  </div>' +
+            '</div>';
+          
+          document.getElementById('boton_Proyectos_en_curso').innerHTML = '' +
+            '<div onclick = "desplegar_proyectos_en_curso()"' +
+            '     class = "button_desplegable_rojo col-lg-aut col-md-aut col-sm-aut col-xs-aut">' +
+            '  <i class="material-icons">expand_less</i>&nbsp;&nbsp;&nbsp;&nbsp;<b>Ocultar proyectos</b>' +
+            '</div>';
+          consultar_proyectos('En curso');
+        }
+      } catch (error){
+        mensaje_desarrollador(error);
+      };
+    }
+  
+  
+    function desplegar_proyectos_terminados() {
+      try {
+        var valor = document.getElementById('espacio_Proyectos_terminados').innerHTML;
+        if (valor != "") {
+          document.getElementById('espacio_Proyectos_terminados').innerHTML = '';
+          document.getElementById('boton_Proyectos_terminados').innerHTML = '' +
+            '<div onclick = "desplegar_proyectos_terminados()"' +
+            '     class = "button_desplegable_verde col-lg-aut col-md-aut col-sm-aut col-xs-aut">' +
+            '  <i class="material-icons">expand_more</i>&nbsp;&nbsp;&nbsp;&nbsp;<b>Ver proyectos</b>' +
+            '</div>';
+          return;
+        } else {
+          document.getElementById('espacio_Proyectos_terminados').innerHTML = '' +
+            '<div class = "fila">' +
+            '  <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5" style = "height: 5px;padding:0px;"></div>' +
+            '  <div class = "campo col-lg-11 col-md-11 col-sm-11 col-xs-11"><div class = "linea_navy"></div></div>' +
+            '</div>' +
+            '<div class = "fila">' +
+            '  <div class = "col-lg-9-5 col-md-9-5 col-sm-9-5 col-xs-9-5">    ' + 
+            '    <div class = "fila">' +
+            '      <div class = "col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>' +
+            '      <div class = "campo col-lg-2 col-md-2 col-sm-2 col-xs-2 letra_bbva_core_blue" id = "titulo_slo">' +
+            '        <b>Service Line</b>' +
+            '      </div>' +
+            '      <select class = "campo col-lg-2 col-md-2 col-sm-2 col-xs-2" id="slo">' +
+            '        <option style = "color:black" value = "Todos">Todos</option>' +
+            '        <option style = "color:black" value = "BEx Transformation">BEx Transformation</option>' +
+            '        <option style = "color:black" value = "Channels">Channels</option>' +
+            '        <option style = "color:black" value = "Cash Management">Cash Management</option>' +
+            '        <option style = "color:black" value = "CGR">CGR</option>' +
+            '        <option style = "color:black" value = "Cuentas y Transaccionales">Cuentas y Transaccionales</option>' +
+            '        <option style = "color:black" value = "Customer Service Channels">Customer Service Channels</option>' +
+            '        <option style = "color:black" value = "Lending">Lending</option>' +
+            '        <option style = "color:black" value = "Logistic & Digital Services">Logistic & Digital Services</option>' +
+            '        <option style = "color:black" value = "Payments & Services">Payments & Services</option>' +
+            '      </select> ' +
+            '      <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5"></div>' +
+            '      <div class = "campo col-lg-2 col-md-2 col-sm-2 col-xs-2 letra_bbva_core_blue" id = "titulo_digital_agenda">' +
+            '        <b>Operations Digital Agenda</b>' +
+            '      </div>' +
+            '      <select class = "campo col-lg-2 col-md-2 col-sm-2 col-xs-2"  id="digital_agenda">' +
+            '        <option style = "color:black" value = "Todos">Todos</option>' +
+            '        <option style = "color:black" value = "Internal Process">Internal Process</option>' +
+            '        <option style = "color:black" value = "BEx Transformation">BEx Transformation</option>' +
+            '        <option style = "color:black" value = "SDA">SDA</option>' +
+            '      </select> ' +
+            '    </div>' +
+            '    <div style = "height: 6px;"></div>' +
+            '    <div class = "fila">' +
+            '      <div class = "col-lg-1 col-md-1 col-sm-1 col-xs-1">     </div>' +
+            '      <div class = "campo col-lg-2 col-md-2 col-sm-2 col-xs-2 letra_bbva_core_blue" id = "titulo_fecha_inicio">' +
+            '        <b>Fecha Inicio</b>' +
+            '      </div>' +
+            '      <input type = "date" class = "campo col-lg-2 col-md-2 col-sm-2 col-xs-2" id = "fecha_inicio" >' +
+            '      <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5">     </div>' +
+            '      <div class = "campo col-lg-2 col-md-2 col-sm-2 col-xs-2 letra_bbva_core_blue"' +
+            '          id = "titulo_fecha_fin">' +
+            '        <b>Fecha Fin</b>' +
+            '      </div>' +
+            '      <input type = "date" class = "campo col-lg-2 col-md-2 col-sm-2 col-xs-2" id = "fecha_fin" >' +
+            '    </div>' +
+            '    <div style = "height: 0px;">     </div>' +
+            '  </div>' +
+            '  <div class = "col-lg-2 col-md-2 col-sm-2 col-xs-2">   ' +  
+            '    <div class = "fila">' +
+            '      <div style = "height: 3px;">     </div>' +
+            '      <div onclick = "consultar_proyectos(' + "'Terminado'" + ');" class = "button col-lg-aut col-md-aut col-sm-aut col-xs-aut" ' +
+            '          style = "text-align: center;padding: 10px 20px 10px 20px;border-radius: 4px 4px 4px 4px;">' +
+            '        <i class="material-icons">search</i>&nbsp;&nbsp;&nbsp;&nbsp;<b>Buscar</b>' +
+            '      </div>' +
+            '    </div>' +
+            '  </div>' +
+            '</div>' +
+            '<div class = "fila">' +
+            '  <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5" style = "height: 10px;padding:0px;">     </div>' +
+            '  <div class = "campo col-lg-11 col-md-11 col-sm-11 col-xs-11"> ' +    
+            '    <div class = "linea_navy"></div>' +
+            '  </div>' +
+            '</div>' +
+            '<div class = "fila">' +
+            '  <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5">     </div>' +
+            '  <div class = "col-lg-11 col-md-11 col-sm-11 col-xs-11" style = "padding: 0px 2px 3px 2px;">     ' +
+            '    <b style = "color:#277A3E;float:right;cursor: pointer;" ' +
+            '      onclick = "cargar_pagina_web_libre(' +
+            "'https://docs.google.com/spreadsheets/d/1Fq-0aMRQY3FO55ziZtKHydzRbx9tqjpJW1cZqfZ0VVI/edit?usp=sharing'" + 
+            ')">' +
+            '      <i class="tiny material-icons">folder</i> &nbsp;&nbsp;&nbsp;&nbsp; Acceso a Excel' +
+            '    </b>' +
+            '  </div>' +
+            '</div>' +
+            '<div class = "fila">' +
+            '  <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5">     </div>' +
+            '  <div class = "col-lg-11 col-md-11 col-sm-11 col-xs-11" style = "padding: 2px 0px 2px 0px;">     ' +
+            '    <span id = "tabla_proyectos_terminados">' +
+            '      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' +
+            '      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' +
+            '      <div class = "fila">' +
+            '        <div class = "col-lg-5 col-md-5 col-sm-5 col-xs-5"></div>' +
+            '        <div class = "col-lg-5-5 col-md-5-5 col-sm-5-5 col-xs-5-5"><div class = "simbolo_carga"></div></div>' +
+            '      </div>' +
+            '      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' +
+            '      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' +
+            '    </span>' +
+            '  </div>' +
+            '</div>' +
+            '<div style = "height: 5px;">     </div>' +
+            '<div class = "fila">     ' +
+            '  <div class = "col-lg-5 col-md-5 col-sm-5 col-xs-5">     </div>' +
+            '  <div class = "col-lg-2 col-md-2 col-sm-2 col-xs-2">     ' +
+            '    <div class = "linea_navy"></div>' +
+            '  </div>' +
+            '</div>';
+          
+          document.getElementById('boton_Proyectos_terminados').innerHTML = '' +
+            '<div onclick = "desplegar_proyectos_terminados()"' +
+            '     class = "button_desplegable_rojo col-lg-aut col-md-aut col-sm-aut col-xs-aut">' +
+            '  <i class="material-icons">expand_less</i>&nbsp;&nbsp;&nbsp;&nbsp;<b>Ocultar proyectos</b>' +
+            '</div>';
+          
+          consultar_proyectos('Terminado');
+        }
+      } catch (error){
+        mensaje_desarrollador(error);
+      };
+    }
+    
+    function consultar_proyectos(vEstado = "") {
+      try {
+        mensaje_desarrollador('Se inicio procedimiento consultar_proyectos');
+        
+        var Informacion = {}
+        Informacion.slo = document.getElementById('slo').value;
+        Informacion.estado = vEstado;
+        Informacion.digital_agenda = document.getElementById('digital_agenda').value;
+        Informacion.fecha_inicio = document.getElementById('fecha_inicio').value;
+        Informacion.fecha_fin = document.getElementById('fecha_fin').value;
+  
+        if (vEstado == "En curso"){
+          document.getElementById('tabla_proyectos_en_curso').innerHTML = '' +
+            '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' + 
+            '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' + 
+            '<div class = "fila">' + 
+            '  <div class = "col-lg-5 col-md-5 col-sm-5 col-xs-5"></div>' + 
+            '  <div class = "col-lg-5-5 col-md-5-5 col-sm-5-5 col-xs-5-5"><div class = "simbolo_carga"></div></div>' + 
+            '</div>' + 
+            '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' + 
+            '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>';
+  
+          google.script.run.withSuccessHandler(
+            (Informacion) => {
+              if (Informacion.Proyectos == ""){
+                document.getElementById('tabla_proyectos_en_curso').innerHTML = '';
+              } else {
+                document.getElementById("tabla_proyectos_en_curso").innerHTML = Informacion.Proyectos;
+              }
+  
+            }
+          ).cargar_proyectos(Informacion);
+        } else if (vEstado == "Terminado") {
+          document.getElementById('tabla_proyectos_terminados').innerHTML = '' +
+            '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' + 
+            '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' + 
+            '<div class = "fila">' + 
+            '  <div class = "col-lg-5 col-md-5 col-sm-5 col-xs-5"></div>' + 
+            '  <div class = "col-lg-5-5 col-md-5-5 col-sm-5-5 col-xs-5-5"><div class = "simbolo_carga"></div></div>' + 
+            '</div>' + 
+            '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' + 
+            '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>';
+  
+          google.script.run.withSuccessHandler(
+            (Informacion) => {
+              if (Informacion.Proyectos == ""){
+                document.getElementById('tabla_proyectos_terminados').innerHTML = '';
+              } else {
+                document.getElementById("tabla_proyectos_terminados").innerHTML = Informacion.Proyectos;
+              }
+  
+            }
+          ).cargar_proyectos(Informacion);
+  
+        }
+  
+      } catch (error){
+        mensaje_desarrollador(error);
+      };
+    }
+    
+  
+    function habilitar_MAP () {
+      try {
+        var valor = document.getElementById('espacio_MAP').innerHTML;
+        if (valor != "") {
+          document.getElementById('espacio_MAP').innerHTML = '';
+          document.getElementById('boton_MAP').innerHTML = '' +
+            '<div onclick = "habilitar_MAP()"' +
+            '     class = "button_desplegable_verde col-lg-aut col-md-aut col-sm-aut col-xs-aut">' +
+            '  <i class="material-icons">expand_more</i>&nbsp;&nbsp;&nbsp;&nbsp;<b>Acceder a MAP</b>' +
+            '</div>';
+          return;
+        } else {
+  
+        document.getElementById('espacio_MAP').innerHTML = '' +
+          '<div class = "fila">     ' +
+          '  <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5">     </div>' +
+          '  <div class = "campo col-lg-11 col-md-11 col-sm-11 col-xs-11"><div class = "linea_navy"></div></div>' +
+          '</div>' +
+          '<div class = "fila">' +
+          '  <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5">     </div>' +
+          '  <div class = "campo col-lg-2-5 col-md-2-5 col-sm-2-5 col-xs-2-5 letra_bbva_core_blue" id = "titulo_nombre_proyecto">' +
+          '    <b>Nombre del proyecto</b>' +
+          '  </div>' +
+          '  <input class = "campo col-lg-3 col-md-3 col-sm-3 col-xs-3" id = "nombre_proyecto" placeholder = "Ejemplo: Automatizar proceso x por x motivos">' +
+          '  <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5">     </div>' +
+          '  <div class = "campo col-lg-1-5 col-md-1-5 col-sm-1-5 col-xs-1-5 letra_bbva_core_blue" id = "titulo_sponsor">' +
+          '    <b>Sponsor</b>' +
+          '  </div>' +
+          '  <input class = "campo col-lg-3 col-md-3 col-sm-3 col-xs-3" id = "sponsor" placeholder = "Ejemplo: Persona que impulsa el proyecto">' +
+          '</div>' +
+          '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' +
+          '<div class = "fila">' +
+          '  <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5">     </div>' +
+          '  <div class = "campo col-lg-2-5 col-md-2-5 col-sm-2-5 col-xs-2-5 letra_bbva_core_blue" id = "titulo_service_line">' +
+          '    <b>Service Line</b>' +
+          '  </div>' +
+          '  <select class = "campo col-lg-3 col-md-3 col-sm-3 col-xs-3" id="service_line">' +
+          '    <option style = "color:gray"  value = ""  >-</option>' +
+          '    <option style = "color:black" value = "BEx Transformation">BEx Transformation</option>' +
+          '    <option style = "color:black" value = "Channels">Channels</option>' +
+          '    <option style = "color:black" value = "Cash Management">Cash Management</option>' +
+          '    <option style = "color:black" value = "CGR">CGR</option>' +
+          '    <option style = "color:black" value = "Cuentas y Transaccionales">Cuentas y Transaccionales</option>' +
+          '    <option style = "color:black" value = "Customer Services Channels">Customer Services Channels</option>' +
+          '    <option style = "color:black" value = "Lending">Lending</option>' +
+          '    <option style = "color:black" value = "Logistic & Digital Services">Logistic & Digital Services</option>' +
+          '    <option style = "color:black" value = "Payments & Services">Payments & Services</option>' +
+          '  </select> ' +
+          '</div>' +
+          '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' +
+          '<div class = "fila">' +
+          '  <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5">     </div>' +
+          '  <div class = "campo col-lg-2-5 col-md-2-5 col-sm-2-5 col-xs-2-5 letra_bbva_core_blue" id = "titulo_proyecto_estrategico">' +
+          '    <b>¿Es un proyecto estratégico?<br>(Priorizado por gerencia)</b>' +
+          '  </div>' +
+          '  <select class = "campo col-lg-3 col-md-3 col-sm-3 col-xs-3"  id="proyecto_estrategico">' +
+          '    <option style = "color:black" value = "No">No</option>' +
+          '    <option style = "color:black" value = "Si">Si</option>' +
+          '  </select> ' +
+          '</div>' +
+          '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' +
+          '<div class = "fila">' +
+          '  <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5">     </div>' +
+          '  <div class = "campo col-lg-2-5 col-md-2-5 col-sm-2-5 col-xs-2-5 letra_bbva_core_blue" id = "titulo_ahorro_dinero">' +
+          '    <b>Ahorro en dinero</b>' +
+          '  </div>' +
+          '  <input class = "campo col-lg-3 col-md-3 col-sm-3 col-xs-3" id = "ahorro_dinero" placeholder = "Ejemplo: 1000 soles mensuales">' +
+          '  <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5">     </div>' +
+          '  <div class = "campo col-lg-1-5 col-md-1-5 col-sm-1-5 col-xs-1-5 letra_bbva_core_blue" id = "titulo_ahorro_tiempo">' +
+          '    <b>Ahorro en tiempos</b>' +
+          '  </div>' +
+          '  <input class = "campo col-lg-3 col-md-3 col-sm-3 col-xs-3" id = "ahorro_tiempo" placeholder = "Ejemplo: 0.1 FTEs mensuales ó 2 horas diaras">' +
+          '</div>' +
+          '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' +
+          '<div class = "fila">' +
+          '  <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5">     </div>' +
+          '  <div class = "campo col-lg-2-5 col-md-2-5 col-sm-2-5 col-xs-2-5 letra_bbva_core_blue" id = "titulo_calidad_atencion">' +
+          '    <b>¿La mejora afecta la calidad en atención?<br>(Mejora la atención de un proceso con oficina)</b>' +
+          '  </div>' +
+          '  <select class = "campo col-lg-3 col-md-3 col-sm-3 col-xs-3"  id="calidad_atencion">' +
+          '    <option style = "color:black" value = "No">No</option><option style = "color:black" value = "Si">Si</option>' +
+          '  </select> ' +
+          '</div>' +
+          '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' +
+          '<div class = "fila">' +
+          '  <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5">     </div>' +
+          '  <div class = "campo col-lg-2-5 col-md-2-5 col-sm-2-5 col-xs-2-5 letra_bbva_core_blue" id = "titulo_dolor_identificado">' +
+          '    <b>¿Cuál es el dolor identificado?</b>' +
+          '  </div>' +
+          '  <div class="campo col-lg-8 col-md-8 col-sm-8 col-xs-8"><textarea id="dolor_identificado" rows = "3" style = "width:100%; resize: none;"></textarea></div>' +
+          '</div>' +
+          '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' +
+          '<div class = "fila">' +
+          '  <div class = "col-lg-0-5 col-md-0-5 col-sm-0-5 col-xs-0-5">     </div>' +
+          '  <div class = "campo col-lg-2-5 col-md-2-5 col-sm-2-5 col-xs-2-5 letra_bbva_core_blue" id = "titulo_iniciativas">' +
+          '    <b>¿Cuales son las iniciativas de solución?</b>' +
+          '  </div>' +
+          '  <div class="campo col-lg-8 col-md-8 col-sm-8 col-xs-8"><textarea id="iniciativas" rows = "3" style = "width:100%; resize: none;"></textarea></div>' +
+          '</div>' +
+          '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' +
+          '<div class="fila">' +
+          '  <div class=" col-lg-9-5 col-md-9-5 col-sm-9-5 col-xs-9-5">        </div>' +
+          '  <button onclick = "ingresar_proyecto();" class="button col-lg-1-5 col-md-1-5 col-sm-1-5 col-xs-1-5" ' +
+          '          id="ingresar_solicitud" style = "text-align: center;padding: 10px 20px 10px 20px;border-radius: 4px 4px 0px 0px;">' +
+          '    <i class="tiny material-icons">check_circle</i>' +
+          '    <b> Ingresar solicitud</b><br>' +
+          '  </button>' +
+          '</div>' +
+          '<div class="fila">' +
+          '  <div class=" col-lg-9-5 col-md-9-5 col-sm-9-5 col-xs-9-5">        </div>' +
+          '  <span class = "col-lg-1-5 col-md-1-5 col-sm-1-5 col-xs-1-5 fondo_bbva_aqua_medium texto_centrado" style = "border-radius: 0px 0px 4px 4px;" id = "res_ingresar_solicitud"></span>' +
+          '</div>' +
+          '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' +
+          '<div class = "fila">     ' +
+          '  <div class = "col-lg-5 col-md-5 col-sm-5 col-xs-5">     </div>' +
+          '  <div class = "col-lg-2 col-md-2 col-sm-2 col-xs-2">     ' +
+          '    <div class = "linea_navy"></div>' +
+          '  </div>' + 
+          '</div>';
+        
+        document.getElementById('boton_MAP').innerHTML = '' +
+          '<div onclick = "habilitar_MAP()"' +
+          '     class = "button_desplegable_rojo col-lg-aut col-md-aut col-sm-aut col-xs-aut">' +
+          '  <i class="material-icons">expand_less</i>&nbsp;&nbsp;&nbsp;&nbsp;<b>Ocultar MAP</b>' +
+          '</div>';
+        }     
+      } catch (error){
+        mensaje_desarrollador(error);
+      }
+    }
+    
+    function consultar_backlog() {
+      try {
+        var Informacion = {}
+        
+        Informacion.slo = document.getElementById('slo').value;
+        Informacion.estado = "";
+        Informacion.digital_agenda = document.getElementById('digital_agenda').value;
+        Informacion.fecha_inicio = "";
+        Informacion.fecha_fin = "";
+        
+        document.getElementById('tabla_backlog').innerHTML = '' +
+          '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' + 
+          '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' + 
+          '<div class = "fila">' + 
+          '  <div class = "col-lg-5 col-md-5 col-sm-5 col-xs-5"></div>' + 
+          '  <div class = "col-lg-5-5 col-md-5-5 col-sm-5-5 col-xs-5-5"><div class = "simbolo_carga"></div></div>' + 
+          '</div>' + 
+          '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>' + 
+          '<div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>';
+    
+        google.script.run.withSuccessHandler(
+          (Informacion) => {
+            if (Informacion.Proyectos == ""){
+              document.getElementById('tabla_backlog').innerHTML = '';
+            } else {
+              document.getElementById("tabla_backlog").innerHTML = Informacion.Proyectos;
+            }
+          }).cargar_backlog(Informacion);
+     
+      } catch (error){
+        mensaje_desarrollador(error);
+      };
+      
+    }
+    
+    function Chart_Gant_Proyectos() {
+      try {
+        var container = document.getElementById('gant_proyectos');
+        var chart = new google.visualization.Timeline(container);
+        var dataTable = new google.visualization.DataTable();
+  
+        dataTable.addColumn({ type: 'string', id: 'President' });
+        dataTable.addColumn({ type: 'date', id: 'Start' });
+        dataTable.addColumn({ type: 'date', id: 'End' });
+        dataTable.addRows([
+          [ 'Proyecto 1', new Date(2020, 11, 1), new Date(2020, 12, 3) ],
+          [ 'Proyecto 2', new Date(2020, 12, 1),  new Date(2020, 12, 25) ],
+          [ 'Proyecto 3', new Date(2020, 12, 4),  new Date(2021, 1, 1) ]]);
+  
+        chart.draw(dataTable);
+          
+      } catch (error){
+        mensaje_desarrollador(error);
+      };
+      
+    }
+  
+    function ingresar_proyecto() {
+      try {
+        document.getElementById('titulo_nombre_proyecto').style.color = "#004481";      
+        document.getElementById('titulo_sponsor').style.color = "#004481";
+        document.getElementById('titulo_service_line').style.color = "#004481";      
+        document.getElementById('titulo_dolor_identificado').style.color = "#004481";
+        document.getElementById('titulo_iniciativas').style.color = "#004481";
+        document.getElementById('titulo_proyecto_estrategico').style.color = "#004481";      
+        document.getElementById('titulo_ahorro_dinero').style.color = "#004481";
+        document.getElementById('titulo_ahorro_tiempo').style.color = "#004481";
+        document.getElementById('titulo_calidad_atencion').style.color = "#004481";
+        
+        document.getElementById('res_ingresar_solicitud').innerHTML = "";
+        document.getElementById('res_ingresar_solicitud').style.color = "white";
+        document.getElementById('res_ingresar_solicitud').style.background = "#02A5A5";
+        document.getElementById('ingresar_solicitud').style.background = "#02A5A5";
+        
+        mensaje_desarrollador('formato titulos completo');
+  
+        var nbpr = document.getElementById('nombre_proyecto').value       ;      
+        var spon = document.getElementById('sponsor').value               ;
+        var svln = document.getElementById('service_line').value          ;      
+        var dlid = document.getElementById('dolor_identificado').value    ;
+        var inic = document.getElementById('iniciativas').value           ;
+        var pres = document.getElementById('proyecto_estrategico').value           ;
+        var ahdi = document.getElementById('ahorro_dinero').value         ;
+        var ahti = document.getElementById('ahorro_tiempo').value         ;
+        var clat = document.getElementById('calidad_atencion').value      ;
+  
+        var texto_notificacion = '' + 
+          '<div class="fila"><div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style = "padding: 0px 10px 0px 10px;text-align: left;">Nombre proyecto: </div>' + 
+          '<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style = "padding: 0px 10px 0px 10px;text-align: left;">' + nbpr + '</div></div>' + 
+          '<div class="fila"><div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style = "padding: 0px 10px 0px 10px;text-align: left;">Sponsor: </div>' + 
+          '<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style = "padding: 0px 10px 0px 10px;text-align: left;">' + spon + '</div></div>' + 
+          '<div class="fila"><div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style = "padding: 0px 10px 0px 10px;text-align: left;">Service Line: </div>' + 
+          '<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style = "padding: 0px 10px 0px 10px;text-align: left;">' + svln + '</div></div>' + 
+          '<div class="fila"><div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style = "padding: 0px 10px 0px 10px;text-align: left;">Dolor identificado: </div>' + 
+          '<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style = "padding: 0px 10px 0px 10px;text-align: left;">' + dlid + '</div></div>' + 
+          '<div class="fila"><div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style = "padding: 0px 10px 0px 10px;text-align: left;">Iniciativas: </div>' + 
+          '<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style = "padding: 0px 10px 0px 10px;text-align: left;">' + inic + '</div></div>' + 
+          '<div class="fila"><div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style = "padding: 0px 10px 0px 10px;text-align: left;">Proyecto estratégico: </div>' + 
+          '<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style = "padding: 0px 10px 0px 10px;text-align: left;">' + pres + '</div></div>' + 
+          '<div class="fila"><div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style = "padding: 0px 10px 0px 10px;text-align: left;">Ahorro en dinero: </div>' + 
+          '<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style = "padding: 0px 10px 0px 10px;text-align: left;">' + ahdi + '</div></div>' + 
+          '<div class="fila"><div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style = "padding: 0px 10px 0px 10px;text-align: left;">Ahorro en tiempos: </div>' + 
+          '<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style = "padding: 0px 10px 0px 10px;text-align: left;">' + ahti + '</div></div>' + 
+          '<div class="fila"><div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style = "padding: 0px 10px 0px 10px;text-align: left;">Calidad de atención: </div>' + 
+          '<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style = "padding: 0px 10px 0px 10px;text-align: left;">' + clat + '</div></div>'; 
+  
+        mensaje_desarrollador('valores capturados');
+        
+        var validacion_llenado = true;
+  
+        if (nbpr == "") { document.getElementById('titulo_nombre_proyecto').style.color = "#DA3851";validacion_llenado = false; };   
+        if (spon == "") { document.getElementById('titulo_sponsor').style.color = "#DA3851";validacion_llenado = false; }; 
+        if (svln == "") { document.getElementById('titulo_service_line').style.color = "#DA3851";validacion_llenado = false; }; 
+        if (dlid == "") { document.getElementById('titulo_dolor_identificado').style.color = "#DA3851";validacion_llenado = false; }; 
+        if (inic == "") { document.getElementById('titulo_iniciativas').style.color = "#DA3851";validacion_llenado = false; }; 
+        if (pres == "") { document.getElementById('titulo_proyecto_estrategico').style.color = "#DA3851";validacion_llenado = false; }; 
+        //if (ahdi == "") { document.getElementById('titulo_ahorro_dinero').style.color = "#DA3851";validacion_llenado = false; }; 
+        //if (ahti == "") { document.getElementById('titulo_ahorro_tiempo').style.color = "#DA3851";validacion_llenado = false; }; 
+        if (clat == "") { document.getElementById('titulo_calidad_atencion').style.color = "#DA3851";validacion_llenado = false; }; 
+                          
+        mensaje_desarrollador('validaciones iniciales');
+                          
+        if (validacion_llenado == false) {
+          document.getElementById('res_ingresar_solicitud').innerHTML = "* Completar información";
+          document.getElementById('res_ingresar_solicitud').style.color = "white";
+          document.getElementById('res_ingresar_solicitud').style.background = "#DA3851";
+          document.getElementById('ingresar_solicitud').style.background = "#DA3851";
+          return;
+        };
+        
+        mensaje_desarrollador('campos vacíos validados');
+        
+        var ult_fila = 1;
+        var columnas = 8;
+        var Matriz_information = new Array(ult_fila);
+        for (var fila = 0; fila < ult_fila; fila++) {
+          //crear cantidad de columnas para cada una de las filas
+          Matriz_information[fila] = new Array(columnas);
+  
+          Matriz_information[fila][0] = nbpr ;
+          Matriz_information[fila][1] = spon ;
+          Matriz_information[fila][2] = svln ;
+          Matriz_information[fila][3] = dlid ;
+          Matriz_information[fila][4] = inic ;
+          Matriz_information[fila][5] = pres ;
+          Matriz_information[fila][6] = ahdi ;
+          Matriz_information[fila][7] = ahti ;
+          Matriz_information[fila][8] = clat ;
+        };
+        
+        mensaje_desarrollador('Matriz generada');
+  
+        google.script.run.Guardar_Proyectos_por_priorizar(Matriz_information);
+        
+        document.getElementById('espacio_MAP').innerHTML = '';
+        
+        mensaje_desarrollador('Formato listo');
+        
+        document.getElementById('pw_notificacion').innerHTML = '' +
+            '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>' +
+            '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 navegador3">' +
+            '  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">' +
+            '    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">' +
+            '      Solicitud ingresada correctamente' +
+            '    </div>' + texto_notificacion +
+            '    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>' +
+            '    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">' +
+            '      <button onclick = "limpiar_notificacion();"' + 
+            '              class="col-lg-12 col-md-12 col-sm-12 col-xs-12 button_notificacion casilla_boton_ingreso texto_centrado" ' +
+            '              id="id_limpiar_notificacion">' +
+            '        <b>Aceptar</b><br>' +
+            '      </button>' +
+            '    </div>' +
+            '  </div>' +
+            '</div>';
+            
+      } catch (error){
+        mensaje_desarrollador(error);
+      };
+    };
+    
+    
+    
+    
+    function ingresar_solicitud_actualizar_perfil() {
+      try {
+      
+        document.getElementById('titulo_registro').style.color = "#004481";
+        document.getElementById('titulo_nombre_completo').style.color = "#004481";      
+        document.getElementById('titulo_nombre').style.color = "#004481";
+        document.getElementById('titulo_oficina').style.color = "#004481";  
+        document.getElementById('titulo_nombre_oficina').style.color = "#004481";      
+        document.getElementById('titulo_territorio').style.color = "#004481";
+  
+        document.getElementById('res_ingresar_solicitud').innerHTML = "";
+        document.getElementById('res_ingresar_solicitud').style.color = "white";
+        document.getElementById('res_ingresar_solicitud').style.background = "#02A5A5";
+        document.getElementById('ingresar_solicitud').style.background = "#02A5A5";
+  
+        mensaje_desarrollador("Titulos formato");
+  
+        var correo = document.getElementById('correo').value;  
+        var acceso = document.getElementById('acceso').value;  
+        var registro = document.getElementById('registro').value;  
+        var nombre_completo = document.getElementById('nombre_completo').value;    
+        var nombre = document.getElementById('nombre').value;
+        var oficina = document.getElementById('oficina').value;      
+        var nombre_oficina = document.getElementById('nombre_oficina').value;
+        var territorio = document.getElementById('territorio').value;
+  
+        var texto_notificacion = '' + 
+          '<div class="fila"><div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style = "padding: 0px 10px 0px 10px;text-align: left;">Acceso: </div>' + 
+          '<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style = "padding: 0px 10px 0px 10px;text-align: left;">' + acceso + '</div></div>' + 
+          '<div class="fila"><div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style = "padding: 0px 10px 0px 10px;text-align: left;">Registro: </div>' + 
+          '<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style = "padding: 0px 10px 0px 10px;text-align: left;">' + registro + '</div></div>' + 
+          '<div class="fila"><div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style = "padding: 0px 10px 0px 10px;text-align: left;">Nombre completo: </div>' + 
+          '<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style = "padding: 0px 10px 0px 10px;text-align: left;">' + nombre_completo + '</div></div>' + 
+          '<div class="fila"><div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style = "padding: 0px 10px 0px 10px;text-align: left;">Nombre: </div>' + 
+          '<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style = "padding: 0px 10px 0px 10px;text-align: left;">' + nombre + '</div></div>' + 
+          '<div class="fila"><div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style = "padding: 0px 10px 0px 10px;text-align: left;">Oficina: </div>' + 
+          '<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style = "padding: 0px 10px 0px 10px;text-align: left;">' + oficina + '</div></div>' + 
+          '<div class="fila"><div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style = "padding: 0px 10px 0px 10px;text-align: left;">Nombre oficina: </div>' + 
+          '<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style = "padding: 0px 10px 0px 10px;text-align: left;">' + nombre_oficina + '</div></div>' + 
+          '<div class="fila"><div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style = "padding: 0px 10px 0px 10px;text-align: left;">Territorio: </div>' + 
+          '<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style = "padding: 0px 10px 0px 10px;text-align: left;">' + territorio + '</div></div>'; 
+  
+        mensaje_desarrollador("valores capturados");
+        
+        var validacion_llenado = true;
+        
+        if (registro == "") { document.getElementById('titulo_registro').style.color = "#DA3851";validacion_llenado = false; };   
+        if (nombre_completo == "") { document.getElementById('titulo_nombre_completo').style.color = "#DA3851";validacion_llenado = false; }; 
+        if (nombre == "") { document.getElementById('titulo_nombre').style.color = "#DA3851";validacion_llenado = false; }; 
+        if (oficina == "") { document.getElementById('titulo_oficina').style.color = "#DA3851";validacion_llenado = false; }; 
+        if (nombre_oficina == "") { document.getElementById('titulo_nombre_oficina').style.color = "#DA3851";validacion_llenado = false; }; 
+        if (territorio == "") { document.getElementById('titulo_territorio').style.color = "#DA3851";validacion_llenado = false; }; 
+        
+        mensaje_desarrollador("validaciones iniciales");
+  
+        mensaje_desarrollador("validaciones complejas");
+                          
+        if (validacion_llenado == false) {
+          document.getElementById('res_ingresar_solicitud').innerHTML = "* Completar información";
+          document.getElementById('res_ingresar_solicitud').style.color = "white";
+          document.getElementById('res_ingresar_solicitud').style.background = "#DA3851";
+          document.getElementById('ingresar_solicitud').style.background = "#DA3851";
+          return;
+        };
+        
+        mensaje_desarrollador("campos vacíos validados");
+        
+        var inf_usuario = {};
+        
+        inf_usuario.registro = registro;
+        inf_usuario.nombre_completo = nombre_completo;
+        inf_usuario.nombre = nombre;
+        inf_usuario.oficina = oficina;
+        inf_usuario.nombre_oficina = nombre_oficina;
+        inf_usuario.territorio = territorio;
+        
+        google.script.run.actualizar_usuario(inf_usuario);
+        
+        mensaje_desarrollador("campos cargados");
+        
+        document.getElementById('res_ingresar_solicitud').innerHTML = "* Información actualizada";
+        document.getElementById('res_ingresar_solicitud').style.color = "white";
+        document.getElementById('res_ingresar_solicitud').style.background = "#48AE64";
+        document.getElementById('ingresar_solicitud').style.background = "#48AE64";
+        
+        mensaje_desarrollador("formato listo");
+        
+        document.getElementById('pw_notificacion').innerHTML = '' +
+            '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>' +
+            '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 navegador3">' +
+            '  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">' +
+            '    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">' +
+            '      Solicitud ingresada correctamente' +
+            '    </div>' + texto_notificacion +
+            '    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>' +
+            '    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">' +
+            '      <button onclick = "limpiar_notificacion();"' + 
+            '              class="col-lg-12 col-md-12 col-sm-12 col-xs-12 button_notificacion casilla_boton_ingreso texto_centrado" ' +
+            '              id="id_limpiar_notificacion">' +
+            '        <b>Aceptar</b><br>' +
+            '      </button>' +
+            '    </div>' +
+            '  </div>' +
+            '</div>';
+  
+            
+      } catch (mensaje_error){
+        mensaje_desarrollador(mensaje_error);
+      };
+    };
+  
+    
+  
+  </script>

@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <base target = "_top">
+    <meta charset = "UTF-8">
+    <meta name = "viewport"    content = "width = device-width, initial-scale = 1.0">
+    <meta name = "author"      content = "Orlando Luna - P027404 - Monetización BEC - Client Solutions">
+    <meta name = "description" content = "Monetization Services">
+    <meta name = "keywords"    content = "">
+    
+    <title>MS</title>
+    
+    <link rel = "stylesheet" href = "https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap">
+    <link rel = "stylesheet" href = "https://fonts.googleapis.com/css2?family=Raleway:wght@800;900&display=swap">
+    <link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    <script type = "text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
+    <script type = "text/javascript"> google.charts.load('current', {'packages':['timeline']}); </script>
+    
+    <?!= include('Estilo'); ?>
+    <?!= include('Procedimientos'); ?>
+
+    <?!= include('AC_CTS_Retencion_Proc'); ?>
+
+    <?!= include('CM_Remesas_Proc'); ?>
+
+    <?!= include('CGR_Consultas2L_Proc'); ?>
+
+    <?!= include('CSC_Recaudos_Proc'); ?>
+    
+
+    <?!= include('LEN_Autorzaciones_Garant_Proc'); ?>
+    <?!= include('LEN_Cartera_Prorroga_Proc'); ?>
+    <?!= include('LEN_Cartera_Consultas_Proc'); ?>
+    
+    <?!= include('LEN_Cred_Hip_Proc'); ?>
+    <?!= include('LEN_Cred_Hip_BEC_Proc'); ?>
+
+    <?!= include('LEN_Lib_Garant_Proc'); ?>
+    
+    
+    <?!= include('LEN_CV_DPS_Proc'); ?>
+    <?!= include('LEN_CV_Riesgos_Val_Proc'); ?>
+    <?!= include('LEN_CV_Desembolso_Proc'); ?>
+    <?!= include('LEN_CV_Consultas_Proc'); ?>
+    
+    <?!= include('LEN_Liq_Hip_Proc'); ?>
+    <?!= include('LEN_Reprog_COFIDE_Proc'); ?>
+    <?!= include('LEN_Reprog_no_procesada_Proc'); ?>
+    <?!= include('LEN_Ext_Cheques_Proc'); ?>
+    <?!= include('LEN_Sol_Tasacion_Proc'); ?>
+    
+
+    <?!= include('LDS_Atencion_FU_Proc'); ?>
+
+  </head>
+        
+  <body>
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 navegador">
+      
+      <?!= include('Logo_BBVA'); ?>
+
+      <ul class = "col-lg-aut col-md-aut col-sm-aut col-xs-aut" style = "float: left;">
+				<li class = "col-lg-aut col-md-aut col-sm-aut col-xs-aut" style = "padding: 10px 10px 10px 10px;">
+          <a onclick = "cargarContenedor('Inicio')"
+             style = "font-size:32px;">MS</a>
+				</li>
+        <li class = "col-lg-aut col-md-aut col-sm-aut col-xs-aut" style = "padding: 10px 10px 20px 10px;">
+          <a onclick = "cargarContenedor('Formularios')">FORMULARIOS</a>
+          
+          <ul class = "col-" style = "float: left;">
+            
+            <!--
+            <li class = "col-" style = "">
+              <a onclick = "cargarContenedor('Formularios_Accounts')">PRUEBA</a>
+
+              <ul class = "col-" style = "float: left;">
+                <li class = "col-" style = "">
+                  <a onclick = "cargarContenedor('AC_CTS_Retencion')">PRUEBA</a>
+                  <ul class = "col-" style = "float: left;">
+                    <li class = "col-" style = "">
+                      <a onclick = "cargarContenedor('AC_CTS_Retencion_Ing')">PRUEBA</a>
+                      <ul class = "col-" style = "float: left;">
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('AC_CTS_Retencion_Ing')">PRUEBA</a>
+                        </li>
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('AC_CTS_Retencion_Con')">PRUEBA</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class = "col-" style = "">
+                      <a onclick = "cargarContenedor('AC_CTS_Retencion_Con')">PRUEBA</a>
+                    </li>
+                  </ul>
+                </li>
+                
+              </ul>
+            </li>-->
+
+
+            <li class = "col-" style = "">
+                <a onclick = "cargarContenedor('Formularios_SIO_Metodizacion')">SIO METODIZACIÓN</a>
+  
+                <ul class = "col-" style = "float: left;">
+                  <li class = "col-" style = "">
+                    <a onclick = "cargarContenedor('SIO_Metodizacion')">PETICION DE METODIZACIÓN</a>
+                    <ul class = "col-" style = "float: left;">
+                      <li class = "col-" style = "">
+                        <a onclick = "cargarContenedor('SIO_Metodizacion_Ing')">INGRESAR SOLICITUD</a>
+                      </li>
+                      <li class = "col-" style = "">
+                        <a onclick = "cargarContenedor('SIO_Metodizacion_Con')">CONSULTAR SOLICITUD</a>
+                      </li>
+                    </ul>
+                  </li>
+                  
+                </ul>
+              </li>
+            
+            
+            <li class = "col-" style = "">
+              <a onclick = "cargarContenedor('Formularios_Accounts')">ACCOUNTS & TRANSACTIONALS</a>
+
+              <ul class = "col-" style = "float: left;">
+                <li class = "col-" style = "">
+                  <a onclick = "cargarContenedor('AC_CTS_Retencion')">SOLICITUD DE DISPONIBLE DE CTS CON RETENCIÓN JUDICIAL</a>
+                  <ul class = "col-" style = "float: left;">
+                    <li class = "col-" style = "">
+                      <a onclick = "cargarContenedor('AC_CTS_Retencion_Ing')">INGRESAR SOLICITUD</a>
+                    </li>
+                    <li class = "col-" style = "">
+                      <a onclick = "cargarContenedor('AC_CTS_Retencion_Con')">CONSULTAR SOLICITUD</a>
+                    </li>
+                  </ul>
+                </li>
+                
+              </ul>
+            </li>
+
+            <!--
+            <li class = "col-" style = "">
+              <a onclick = "cargarContenedor('Formularios_Cash')">CASH MANAGEMENT</a>
+              <ul class = "col-" style = "float: left;">
+                <li class = "col-" style = "">
+                  <a onclick = "cargarContenedor('CM_Remesas')">GESTIÓN DE REMESAS</a>
+                  <ul class = "col-" style = "float: left;">
+                    <li class = "col-" style = "">
+                      <a onclick = "cargarContenedor('CM_Remesas_Ing')">INGRESAR SOLICITUD</a>
+                    </li>
+                    <li class = "col-" style = "">
+                      <a onclick = "cargarContenedor('CM_Remesas_Con')">CONSULTAR SOLICITUD</a>
+                    </li>
+                    <li class = "col-" style = "">
+                      <a onclick = "cargarContenedor('CM_Remesas_Ate')">ATENDER SOLICITUD</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            -->
+
+
+            <li class = "col-" style = "">
+              <a onclick = "cargarContenedor('Formularios_CGR')">CGR</a>
+              <ul class = "col-" style = "float: left;">
+                <li class = "col-" style = "">
+                  <a onclick = "cargarContenedor('CGR_Consultas2L')">CONSULTAS 2L</a>
+                  <ul class = "col-" style = "float: left;">
+                    <li class = "col-" style = "">
+                      <a onclick = "cargarContenedor('CGR_Consultas2L_Ing')">INGRESAR SOLICITUD</a>
+                    </li>
+                    <li class = "col-" style = "">
+                      <a onclick = "cargarContenedor('CGR_Consultas2L_Con')">CONSULTAR SOLICITUD</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+
+            <li class = "col-" style = "">
+              <a onclick = "cargarContenedor('Formularios_CSC')">CUSTOMER SERVICE CHANNELS</a>
+              <ul class = "col-" style = "float: left;">
+                <li class = "col-" style = "">
+                  <a onclick = "cargarContenedor('CSC_Recaudos')">RECAUDOS</a>
+                  <ul class = "col-" style = "float: left;">
+                    <li class = "col-" style = "">
+                      <a onclick = "cargarContenedor('CSC_Recaudos_Ing')">INGRESAR SOLICITUD</a>
+                    </li>
+                    <li class = "col-" style = "">
+                      <a onclick = "cargarContenedor('CSC_Recaudos_Con')">CONSULTAR O ACTUALIZAR SOLICITUD</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+
+
+            <li class = "col-" style = "">
+              <a onclick = "cargarContenedor('Formularios_Lending')">LENDING</a>
+              <ul class = "col-" style = "float: left;">
+
+                <li class = "col-" style = "">
+                  <a >CARTERA</a>
+                  <ul class = "col-" style = "float: left;">
+                    <li class = "col-" style = "">
+                      <a onclick = "cargarContenedor('LEN_Cartera_Consultas')">CONSULTAS O SOLICITUDES DE CARTERA</a>
+                      <ul class = "col-" style = "float: left;">
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_Cartera_Consultas_Ing')">INGRESAR SOLICITUD</a>
+                        </li>
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_Cartera_Consultas_Con')">CONSULTAR SOLICITUD</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class = "col-" style = "">
+                      <a onclick = "cargarContenedor('LEN_Cartera_Prorroga')">PRÓRROGAS DE CARTERA</a>
+                      <ul class = "col-" style = "float: left;">
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_Cartera_Prorroga_Ing')">INGRESAR SOLICITUD</a>
+                        </li>
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_Cartera_Prorroga_Con')">CONSULTAR SOLICITUD</a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+
+
+                <li class = "col-" style = "">
+                  <a>CRÉDITOS VEHICULARES</a>
+                  <ul class = "col-" style = "float: left;">
+
+                    
+                    
+                    <li class = "col-" style = "">
+                      <a onclick = "cargarContenedor('LEN_CV_DPS')">REGISTRO DE DPS<br>[EN DESARROLLO]</a>
+                      <ul class = "col-" style = "float: left;">
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_CV_DPS_Ing')">INGRESAR SOLICITUD</a>
+                        </li>
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_CV_DPS_Con')">CONSULTAR SOLICITUD</a>
+                        </li>
+                      </ul>
+                    </li>
+                    
+                    <!--
+                    <li class = "col-" style = "">
+                      <a onclick = "cargarContenedor('')">REGISTRO DE ENDOSOS DE POLIZA<br>[EN DESARROLLO]</a>
+                      <ul class = "col-" style = "float: left;">
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('')">INGRESAR SOLICITUD</a>
+                        </li>
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('')">CONSULTAR SOLICITUD</a>
+                        </li>
+                      </ul>
+                    </li>
+                    -->
+
+                    <li class = "col-" style = "">
+                      <a onclick = "cargarContenedor('LEN_CV_Riesgos_Val')">VALIDACIONES EN RIESGOS</a>
+                      <ul class = "col-" style = "float: left;">
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_CV_Riesgos_Val_Ing')">INGRESAR SOLICITUD</a>
+                        </li>
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_CV_Riesgos_Val_Con')">CONSULTAR SOLICITUD</a>
+                        </li>
+                        <li class = "col-" style = "">
+                          <a onclick = "cargar_pagina_web_libre('https://docs.google.com/presentation/d/1g8ykJMGOTS_m9wVNdKzHNGCGstNzXZkHPWa8-AoIMP4/edit?usp=sharing')">GUÍA DE FORMULARIO</a>
+                        </li>
+                      </ul>
+                    </li>
+
+
+                    <li class = "col-" style = "">
+                      <a onclick = "cargarContenedor('LEN_CV_Desembolso')">DESEMBOLSOS DE CRÉDITOS VEHICULARES</a>
+                      <ul class = "col-" style = "float: left;">
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_CV_Desembolso_Ing')">INGRESAR SOLICITUD</a>
+                        </li>
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_CV_Desembolso_Con')">CONSULTAR SOLICITUD</a>
+                        </li>
+                        <li class = "col-" style = "">
+                          <a onclick = "cargar_pagina_web_libre('https://docs.google.com/presentation/d/1g8ykJMGOTS_m9wVNdKzHNGCGstNzXZkHPWa8-AoIMP4/edit?usp=sharing')">GUÍA DE FORMULARIO</a>
+                        </li>
+                      </ul>
+                    </li>
+
+                    
+
+
+                    <li class = "col-" style = "">
+                      <a onclick = "cargarContenedor('LEN_CV_Consultas')">SOLICITUDES POST VENTA DE CRÉDITOS VEHICULARES</a>
+                      <ul class = "col-" style = "float: left;">
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_CV_Consultas_Ing')">INGRESAR SOLICITUD</a>
+                        </li>
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_CV_Consultas_Con')">CONSULTAR SOLICITUD</a>
+                        </li>
+                      </ul>
+                    </li>
+
+                    
+
+                  </ul>
+                </li>
+
+
+                <li class = "col-" style = "">
+                  <a>EXTORNOS Y EMISIÓN DE CHEQUES POR OFICINA</a>
+                  <ul class = "col-" style = "float: left;">
+                    <li class = "col-" style = "">
+                      <a onclick = "cargarContenedor('LEN_Ext_Cheques')">SOLICITUDES DE EXTORNOS Y EMISIÓN DE CHEQUES POR OFICINA</a>
+                      <ul class = "col-" style = "float: left;">
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_Ext_Cheques_Ing')">INGRESAR SOLICITUD</a>
+                        </li>
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_Ext_Cheques_Con')">CONSULTAR SOLICITUD</a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                
+
+
+                <li class = "col-" style = "">
+                  <a>GARANTÍAS</a>
+                  <ul class = "col-" style = "float: left;">
+                    <li class = "col-" style = "">
+                      <a onclick = "cargarContenedor('LEN_Autorzaciones_Garant')">CONSULTAS O AUTORIZACIONES DE GARANTÍAS</a>
+                      <ul class = "col-" style = "float: left;">
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_Autorzaciones_Garant_Ing')">INGRESAR SOLICITUD</a>
+                        </li>
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_Autorzaciones_Garant_Con')">CONSULTAR SOLICITUD</a>
+                        </li>
+                      </ul>
+                    </li>
+
+                    <li class = "col-" style = "">
+                      <a onclick = "cargarContenedor('LEN_Cred_Hip_BEC')">INGRESOS DE GARANTÍAS PARA BEC</a>
+                      <ul class = "col-" style = "float: left;">
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_Cred_Hip_BEC_Ing')">INGRESAR SOLICITUD</a>
+                        </li>
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_Cred_Hip_BEC_Con')">CONSULTAR SOLICITUD</a>
+                        </li>
+                        <li class = "col-" style = "">
+                          <a onclick = "cargar_pagina_web_libre('https://docs.google.com/presentation/d/1eNFRJKqmGpSXIALRhd9pfDRALrRA5sD6DScaL796zP0/edit?usp=sharing')">GUÍA DE FORMULARIO</a>
+                        </li>
+
+                        
+                      </ul>
+                    </li>
+
+                    <li class = "col-" style = "">
+                      <a onclick = "cargarContenedor('LEN_Lib_Garant')">LIBERACIÓN DE GARANTÍAS<br>[EN DESARROLLO]</a>
+                      <ul class = "col-" style = "float: left;">
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_Lib_Garant_Ing')">INGRESAR SOLICITUD</a>
+                        </li>
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_Lib_Garant_Con')">CONSULTAR SOLICITUD</a>
+                        </li>
+                      </ul>
+                    </li>
+
+
+                    
+
+
+
+                  </ul>
+                </li>
+
+                <li class = "col-" style = "">
+                  <a>HIPOTECARIOS</a>
+                  <ul class = "col-" style = "float: left;">
+
+                    <li class = "col-" style = "">
+                      <a onclick = "cargarContenedor('LEN_Cred_Hip')">DESEMBOLSOS DE CRÉDITOS HIPOTECARIOS</a>
+                      <ul class = "col-" style = "float: left;">
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_Cred_Hip_Ing')">INGRESAR SOLICITUD</a>
+                        </li>
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_Cred_Hip_Con')">CONSULTAR SOLICITUD</a>
+                        </li>
+                        <li class = "col-" style = "">
+                          <a onclick = "cargar_pagina_web_libre('https://docs.google.com/presentation/d/1nS-s5VgyEoC1OJL7p9oNXP0Eky0OvCnrlyNHzOhPFMk/edit?usp=sharing')">GUÍA DE FORMULARIO</a>
+                        </li>
+                      </ul>
+                    </li>
+
+                    
+
+                    <li class = "col-" style = "">
+                      <a onclick = "cargarContenedor('LEN_Liq_Hip')">LIQUIDACIONES HIPOTECARIAS</a>
+                      <ul class = "col-" style = "float: left;">
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_Liq_Hip_Ing')">INGRESAR SOLICITUD</a>
+                        </li>
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_Liq_Hip_Con')">CONSULTAR SOLICITUD</a>
+                        </li>
+                      </ul>
+                    </li>
+
+                  </ul>
+                </li>
+
+
+                
+
+
+
+
+                <li class = "col-" style = "">
+                  <a>REPROGRAMACIONES</a>
+                  <ul class = "col-" style = "float: left;">
+                    <li class = "col-" style = "">
+                      <a onclick = "cargarContenedor('LEN_Reprog_COFIDE')">REPROGRAMACIONES DE PRÉSTAMOS CON GARANTÍAS COFIDE</a>
+                      <ul class = "col-" style = "float: left;">
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_Reprog_COFIDE_Ing')">INGRESAR SOLICITUD</a>
+                        </li>
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_Reprog_COFIDE_Con')">CONSULTAR SOLICITUD</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class = "col-" style = "">
+                      <a onclick = "cargarContenedor('LEN_Reprog_no_procesada')">REPROGRAMACIONES DE PRÉSTAMOS NO PROCESADAS EN OFICINA</a>
+                      <ul class = "col-" style = "float: left;">
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_Reprog_no_procesada_Ing')">INGRESAR SOLICITUD</a>
+                        </li>
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_Reprog_no_procesada_Con')">CONSULTAR SOLICITUD</a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+
+                <li class = "col-" style = "">
+                  <a>TASACIONES</a>
+                  <ul class = "col-" style = "float: left;">
+
+                    <li class = "col-" style = "">
+                      <a onclick = "cargarContenedor('LEN_Sol_Tasacion')">SOLICITUDES DE TASACIONES</a>
+                      <ul class = "col-" style = "float: left;">
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_Sol_Tasacion_Ing')">INGRESAR SOLICITUD</a>
+                        </li>
+                        <li class = "col-" style = "">
+                          <a onclick = "cargarContenedor('LEN_Sol_Tasacion_Con')">CONSULTAR SOLICITUD</a>
+                        </li>
+                        <li class = "col-" style = "">
+                          <a onclick = "cargar_pagina_web_libre('https://docs.google.com/presentation/d/1_vad8mi_N03-MOcspIsv_JwtvJkWCbQLnNVHitc4Tfw/edit?usp=sharing')">GUÍA DE FORMULARIO</a>
+                        </li>
+
+                        
+                      </ul>
+                    </li>
+
+                  </ul>
+                </li>
+
+
+
+
+                
+
+
+
+
+
+                
+
+              </ul>
+            </li>
+
+            
+            <li class = "col-" style = "">
+              <a onclick = "cargar_pagina_web_libre('https://script.google.com/a/bbva.com/macros/s/AKfycbwu63SI81ZBPJEgZ_lFCCuFdX5Muflsvb6vBNRXrXOmF0cr8bhe/exec')">LOGISTIC & DIGITAL SERVICES<br>ACCESO A WEB</a>
+            </li>
+            
+
+
+          </ul>
+				</li>
+
+        <li class = "col-lg-aut col-md-aut col-sm-aut col-xs-aut" style = "padding: 10px 10px 20px 10px;">
+          <a onclick = "cargarContenedor('Tableros')">TABLEROS</a>
+          
+          <ul class = "col-" style = "float: left;">
+            
+            <li class = "col-" style = "">
+              <a onclick = "cargarContenedor('Tableros_Lending')">LENDING</a>
+              <ul class = "col-" style = "float: left;">
+                <li class = "col-" style = "">
+                  <a onclick = "cargarContenedor('Tableros_Lending_CS')">CONTRATACIÓN SENCILLA</a>
+                  <ul class = "col-" style = "float: left;">
+                    <li class = "col-" style = "">
+                      <a onclick = "cargar_pagina_web_libre('https://datastudio.google.com/reporting/3a3ac84f-6fdb-4f70-8fa7-38483d720342')">REPROCESOS</a>
+                    </li>
+                  </ul>
+                </li>
+
+
+                <li class = "col-" style = "">
+                  <a onclick = "cargarContenedor('Tableros_Lending_Hipotecario')">CRÉDITOS HIPOTECARIOS</a>
+                  <ul class = "col-" style = "float: left;">
+                    <li class = "col-" style = "">
+                      <a onclick = "cargar_pagina_web_libre('https://datastudio.google.com/reporting/1c74fddf-30f1-4b59-8388-ac2af0e0ba1c')">ATENCIÓN DE DESEMBOLSOS</a>
+                    </li>
+                  </ul>
+                </li>
+
+                <li class = "col-" style = "">
+                  <a>CRÉDITOS VEHICULARES</a>
+
+                  <ul class = "col-" style = "float: left;">
+                    <li class = "col-" style = "">
+                      <a onclick = "cargar_pagina_web_libre('https://datastudio.google.com/reporting/f10b0cc3-95fa-4a04-bdc0-a942051c004b')">GENERAL</a>
+                    </li>
+                  </ul> 
+
+                </li>
+
+
+                <li class = "col-" style = "">
+                  <a onclick = "cargarContenedor('Tableros_Lending_WebPyme')">WEBPYME</a>
+
+                  <ul class = "col-" style = "float: left;">
+                    <li class = "col-" style = "">
+                      <a onclick = "cargar_pagina_web_libre('https://datastudio.google.com/reporting/adea7999-2981-403b-9224-e6049cfc394a')">REPROCESOS</a>
+                    </li>
+                    <li class = "col-" style = "">
+                      <a onclick = "cargar_pagina_web_libre('https://datastudio.google.com/reporting/247ece20-6eca-4916-88b7-5ee51aa78e71')">SEGUIMIENTO DE PENDIENTES</a>
+                    </li>
+                  </ul>
+
+                </li>
+              </ul>
+            </li>
+
+
+          </ul>
+				</li>
+
+        <li class = "col-lg-aut col-md-aut col-sm-aut col-xs-aut" style = "padding: 10px 10px 20px 10px;">
+          <a onclick = "cargarContenedor('')">OTRAS PÁGINAS</a>
+          
+          <ul class = "col-" style = "float: left;">
+            
+            <li class = "col-" style = "">
+              <a onclick = "cargar_pagina_web_libre('https://sites.google.com/bbva.com/customerservice/inicio')">CUSTOMER SERVICES CHANNELS</a>
+            </li>
+            <li class = "col-" style = "">
+              <a onclick = "cargar_pagina_web_libre('https://sites.google.com/a/bbva.com/wiki-normas/')">NORMATIVA ÚNICA</a>
+            </li>
+            <li class = "col-" style = "">
+              <a onclick = "cargar_pagina_web_libre('https://script.google.com/a/macros/bbva.com/s/AKfycbw4TH_YvL3Bfk2OIrC5Ikpf0lhvVxqnoz3lQl39mQUCJGmc_aI/exec?idguia=1583&alto=820px&menu=home')">PORTAL BEC</a>
+            </li>
+
+
+          </ul>
+				</li>
+
+
+        <span id = "vista_administrador"></span>
+        
+        
+        
+
+			</ul>
+
+
+
+
+      <ul class = "col-lg-aut col-md-aut col-sm-aut col-xs-aut" style = "float: right;">
+        <li class = " col-lg-aut col-md-aut col-sm-aut col-xs-aut" style = "padding: 5px 10px 10px 10px;">
+          <a onclick = "cargarContenedor('Perfil')"
+             style = "font-size:26px;">
+            <i class="material-icons">perm_identity</i>
+          </a>
+				</li>
+        <li class = " col-lg-aut col-md-0 col-sm-0 col-xs-0" style = "padding: 3px 10px 5px 0px;">
+          <a onclick = "cargarContenedor('Perfil')"
+             style = "font-size:10px; text-align: left; line-height: 12px;">
+            <span id = "pw_usuario">
+              Cargando accesos...
+            </span>
+            <br>
+            <span id = "pw_acceso"></span>
+          </a>
+				</li>
+
+        <li class = "col-lg-0 col-md-0 col-sm-0 col-xs-0" style = "padding: 5px 10px 10px 10px;">
+          <a onclick = "cargarContenedor('Manual')"
+             style = "font-size:26px;">
+            <i class="material-icons">library_books</i>
+          </a>
+				</li>
+
+			</ul>
+
+    </div>
+    
+    <div class = "fondo_imagen"></div> 
+    <div class = "fondo_color"></div> 
+
+
+    <div class = "fila navegador_perm">
+      <div class="col-lg-1-5 col-md-1-5 col-sm-1-5 col-xs-1-5"></div>
+      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+        <span id = "pw_notificacion"></span>
+      </div>
+    </div>
+    
+    <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+    
+    <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12" id = "pw_error" 
+         style = "color:white;text-align: center;font-size:10px;padding:10px;"></div>
+
+    <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12" style = "padding: 0px;" id = "contenedor_principal">
+      
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      
+      <div class = "fila">
+        <div class = "col-lg-5 col-md-5 col-sm-5 col-xs-5"></div>
+        <div class = "col-lg-5-5 col-md-5-5 col-sm-5-5 col-xs-5-5">
+          <div class = "simbolo_carga"></div>
+        </div>
+      </div>
+
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      
+    </div>
+
+    <div class="fila fondo_bbva_500">
+      <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 texto_centrado"></div>
+      <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 texto_centrado" style="padding:10px;color:white;">
+        <span>&copy; Todos los derechos reservados</span><br>
+        <span>Desarrollado por Monetización BEC, Client Solutions [v.2021.08.10]</span><br>
+      </div>
+      <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 texto_centrado"></div>
+    </div>
+
+    
+  </body>
+</html>

@@ -1,0 +1,108 @@
+SELECT FEC_PROCESO,DES_OFICINA,DES_TERRITORIO,DES_BANCA,COD_GESTOR,COD_CLIENTE
+,(C.NOMBRE1||C.NOMBRE2||C.NOMBRE3)  as DES_CLIENTE,
+DES_EPIGRAFE,SUM(IMP_SALMECTR),SUM(IMP_SALPUCTR)
+FROM USRFINDATA.STG_SALDOIDA7V@BSIBPDW0@UFINRIE A
+JOIN USRFINDATA.STG_EPIGRAFEG@BSIBPDW0@UFINRIE EG ON A.COD_EPIWEB >= EG.LIMITE_INF AND A.COD_EPIWEB < EG.LIMITE_SUP AND EG.CLASE = 'BBA' AND 
+  EG.ORDEN IN ('50')
+JOIN USRFINDATA.ODS_OFICINA@BSIBPDW0@UFINRIE B ON A.COD_OFICINA=B.COD_OFICINA AND B.FECPRO='30/06/2022' AND B.COD_BANCA IN ('2685','2661')
+LEFT JOIN (           
+           SELECT * FROM USRFINDATA.stg_pe01@BSIBPDW0@UFINRIE WHERE fecpro=(SELECT MAX(fecpro) FROM USRFINDATA.stg_pe01@BSIBPDW0@UFINRIE ) 
+           ) C ON A.COD_CLIENTE=C.CENTRAL
+
+
+WHERE FEC_PROCESO IN (SELECT FEC_ULTMES FROM USRFINDATA.ODS_CALENDARIO@BSIBPDW0@UFINRIE 
+WHERE FEC_ULTMES > '01/01/2022' AND FEC_ULTMES < SYSDATE GROUP BY FEC_ULTMES)
+ 
+GROUP BY  COD_GESTOR,COD_CLIENTE,DES_EPIGRAFE,FEC_PROCESO,DES_OFICINA,DES_TERRITORIO,DES_BANCA,(C.NOMBRE1||C.NOMBRE2||C.NOMBRE3)
+
+
+CONSTRUCCION = SALDO DE RCC/SALDO DE CLIENTES BEC
+
+CON
+
+CUANTOS EL SOW DE TODOS LOS SECTORES
+
+
+Suma de rcc_balance_amount_cart_fian	Suma de rcc_balance_amount_cart_fian_bbva
+
+
+----------------------------------------------------------------------------------------
+
+Puntual vs Medio, Priorizamos el medio
+
+Que considera estos productios, tengo esta columa xxxx y que columnas componene el ri (car _fian)
+
+
+Suma de rcc_balance_amount_bbva	Suma de rcc_balance_amount_cart_fian_bbva
+
+Monto promedio de la comision se tiene que copone
+
+
+colocar solo valor de del sow
+
+
+-----------------------------------
+
+3273301
+3273701\
+---------------------------------------
+
+****REUNION SIO****
+
+PRINCIPALES FUNCIONES DE LA BEC
+
+Se deben agregar que tipos de funciones realiza la BEC. y cuales se estan automatizando
+
+Colocar de manera proactiva que estamos atacando y como estamos solucionado
+
+Evidenciar que nosostros no tenemos la validacion Dual y no aportamos valor
+
+Agregar una lamina: Preocupacion de la carga operativa y la seguridad de la plataforma. Que estamos haciendo
+
+La plataforma lo tienes un area de sistemas
+
+Anadir sustento como carga operativa
+
+Para Sandra ,se tiene que sociabilizar la parte operativa de Riesgos y que nosotros no podemos dar un soporte oficial al banco
+
+Se tiene que anadir la info de la campana de riesgos
+
+---------------------------------------------
+
+Para est
+
+
+Concepto de Garantia Previa
+
+CORPORATIVAS
+
+GRANDES EMPRESAS 
+
+MEDIANA EMPRESAS
+
+LINEA QUEBRADA
+
+R1 + R2 + R3
+
+ENGLOBAR LA EJE Y
+
+TENER 
+
+COLOCAR COMO EJE Y  OTRAS SEGMENTACION
+
+Verificar los Clusters de Info
+
+
+Monto de la Fianzas por Facturacion
+Monto de la Fianzas por Vencimiento
+
+Empezar por BEC y terminar por todas las bancas
+
+Rango de comision Promedio
+
+Agarrar Nivel de Venta
+Nuevo Analisis de Comision x Fianzas
+
+
+
+

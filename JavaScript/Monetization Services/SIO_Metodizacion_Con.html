@@ -1,0 +1,136 @@
+
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>
+
+      <div class = "fila">
+        <div class = "col-lg-2 col-md-1-5 col-sm-1 col-xs-0-5"></div>
+        <div class = "titulo_40_white col-lg-8 col-md-9 col-sm-10 col-xs-11">
+          Solicitud de disponible de CTS con Retención Judicial
+        </div>
+      </div>
+
+      <div class = "fila">     
+        <div class = "col-lg-5 col-md-5 col-sm-5 col-xs-5">     </div>
+        <div class = "col-lg-2 col-md-2 col-sm-2 col-xs-2">     
+          <div class = "linea_blanca"></div>
+        </div>
+      </div>
+
+
+      <div class = "fila">     
+        <div class = "col-lg-1 col-md-1 col-sm-1 col-xs-1">     </div>
+        <div class = "col-lg-10 col-md-10 col-sm-10 col-xs-10">  
+          <a><i class = "button_letra_white material-icons" onclick = "cargarContenedor('Inicio')">home</i>&nbsp&nbsp</a>
+          <a class = "button_letra_white" onclick = "cargarContenedor('Inicio')">Inicio</a>
+          <a class = "button_letra_white" >&nbsp&nbsp/&nbsp&nbsp</a>
+          <a class = "button_letra_white" onclick = "cargarContenedor('Formularios')">Formularios</a>
+          <a class = "button_letra_white" >&nbsp&nbsp/&nbsp&nbsp</a>
+          <a class = "button_letra_white" onclick = "cargarContenedor('Formularios_Accounts')">Accounts & Transactionals</a>
+          <a class = "button_letra_white" >&nbsp&nbsp/&nbsp&nbsp</a>
+          <a class = "button_letra_white" onclick = "cargarContenedor('AC_CTS_Retencion')">Solicitud de disponible de CTS con Retención Judicial</a>
+          <a class = "button_letra_white" >&nbsp&nbsp/&nbsp&nbsp</a>
+          <a class = "button_letra_white" onclick = "cargarContenedor('AC_CTS_Retencion_Con')">Consultar solicitud</a>
+        </div>
+      </div>
+
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>
+      
+
+
+
+
+      <div class = "fila">     
+        <div class = "col-lg-1 col-md-1 col-sm-1 col-xs-1">     </div>
+        <div class = "recuadro_blanco col-lg-10 col-md-10 col-sm-10 col-xs-10">   
+             
+          <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>
+          <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>
+          <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>
+          
+          <div class = "fila">
+            <div class = "col-lg-1 col-md-1 col-sm-1 col-xs-1">     </div>
+            <div class = "campo letra_bbva_aqua_medium col-lg-10 col-md-10 col-sm-10 col-xs-10">
+              Para consultar tu solicitud, ingresa correctamente tu registro en el campo y, luego, selecciona "Consultar solicitud".
+            </div>
+          </div>
+          
+          <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>
+          <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>
+          
+          <div class = "fila">
+            <div class = "col-lg-1 col-md-1 col-sm-1 col-xs-1">     </div>
+            <div id = "titulo_nro_documento" class = "campo col-lg-3 col-md-3 col-sm-3 col-xs-3 letra_bbva_core_blue">
+              <b>Nro Documento del cliente</b>
+            </div>
+            <input class = "campo col-lg-7 col-md-7 col-sm-7 col-xs-7" id = "nro_documento"  placeholder = "Ejemplo: 74028888">
+          </div>
+          
+          <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>
+          
+          <div class = "fila">
+            <div class = "col-lg-1 col-md-1 col-sm-1 col-xs-1">     </div>
+            <div id = "titulo_tipo_consulta" class = "campo col-lg-3 col-md-3 col-sm-3 col-xs-3 letra_bbva_core_blue">
+              <b>Tipo de consulta</b>
+            </div>
+            <select class = "campo col-lg-7 col-md-7 col-sm-7 col-xs-7" id="tipo_consulta">
+              <option style = "color:black" value = "Todo">Consultar todas las solicitudes</option>
+              <option style = "color:black" value = "En curso">Consultar solicitudes en curso</option>
+              <option style = "color:black" value = "Terminados">Consultar solicitudes cerradas</option>
+            </select> 
+          </div>
+          
+          <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>
+          <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>
+          
+          <div class="fila">
+            <div class=" col-lg-8-5 col-md-8-5 col-sm-8-5 col-xs-8-5">        </div>
+            <button onclick = 'consultar_solicitud_disponible_retencion_CTS();' 
+                    class="button casilla_boton_ingreso col-lg-2-5 col-md-2-5 col-sm-2-5 col-xs-2-5 texto_centrado" 
+                    id="consultar_solicitud"
+                    style = "border-radius: 4px 4px 4px 4px;">
+              <i class="tiny material-icons">add_circle</i>
+              <b> Consultar solicitud</b><br>
+            </button>
+          </div>
+
+
+          <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>
+          <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>
+
+          <div class = "fila">
+            <div class = "col-lg-1 col-md-1 col-sm-1 col-xs-1">     </div>
+            <div class = "campo col-lg-10 col-md-10 col-sm-10 col-xs-10">
+              <span id = "informacion_consultada"></span>
+            </div>
+          </div>
+
+          <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>
+          
+          <div class = "fila">     
+            <div class = "col-lg-3 col-md-3 col-sm-3 col-xs-3">     </div>
+            <div class = "col-lg-6 col-md-6 col-sm-6 col-xs-6">     
+              <div class = "fondo_bbva_navy" style = "height: 5px;width:100%;padding:0px;">
+              </div>
+            </div>
+          </div>
+      
+          <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>
+          <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>
+      
+      
+        </div>  
+      </div>    
+      
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>
+      <div class = "fila col-lg-12 col-md-12 col-sm-12 col-xs-12">     </div>
